@@ -6,8 +6,7 @@
 #include "entity.h"
 #include <map>
 #include <string>
-
-struct Block;
+#include "block.h"
 
 class Level {
 

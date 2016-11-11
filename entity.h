@@ -3,13 +3,13 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
-
-struct Block;
+#include "block.h"
 
 class Entity {
 
     public:
         
+        void draw(sf::Window& window);
         std::vector<Block> get_blocks();
 
     private:
