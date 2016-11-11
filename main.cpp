@@ -5,7 +5,7 @@ int main() {
 
     std::cout << "Hello World!" << std::endl;
 
-    sf::Window window(sf::VideoMode(800, 600), "Hello my friend! :)");
+    sf::Window window(sf::VideoMode(800, 600), "Hello my friend! :)", sf::Style::Close);
 
     while (window.isOpen())
     {
