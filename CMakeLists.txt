@@ -9,4 +9,5 @@ file(GLOB ProjectDuck_SRC
     "*.h"
     )
 
-add_executable(duck ${PythonGenerator_SRC})
+add_executable(duck ${ProjectDuck_SRC})
+
