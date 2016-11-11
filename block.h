@@ -1,0 +1,4 @@
+class block {
+    private:
+    public:
+}
