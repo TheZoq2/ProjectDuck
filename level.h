@@ -19,9 +19,9 @@ class Level {
 
         std::vector<std::vector<Block>> grid;
 
-        std::vector<Entity> entities;
+        std::vector<Entity*> entities;
 
-        std::map<std::string, std::vector<Entity>> interaction_map;
+        std::map<std::string, std::vector<Entity*>> interaction_map;
 };
 
 #endif
