@@ -1,7 +1,7 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include <sfml/graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <vector>
 #include "entity.h"
 #include <map>

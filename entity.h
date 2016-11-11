@@ -1,7 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <sfml/graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <vector>
 
 struct Block;
@@ -14,7 +14,7 @@ class Entity {
 
     private:
         
-        sf::Vector2 position;
+        sf::Vector2<int> position;
 };
 
 #endif

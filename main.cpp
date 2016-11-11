@@ -1,5 +1,8 @@
 #include <iostream>
 #include <SFML/Window.hpp>
+#include "entity.h"
+#include "duck.h"
+#include "level.h"
 
 int main() {
 
