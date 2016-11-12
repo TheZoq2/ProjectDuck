@@ -1,17 +1,17 @@
 #include <iostream>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include <chipmunk/chipmunk.h>
+#include <ctime>
 
 #include "wave.h"
 #include "entities/entity.hpp"
 #include "level.hpp"
 
+
 int main() {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 16;
-//	sf::Vector2i screenDimensions(800,400);
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Hello my friend! :)", sf::Style::Close, settings);
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Hello my friend! :)", sf::Style::Close, settings);
 
 	sf::Texture bTexture;
 	sf::Sprite bImage;
@@ -25,31 +25,20 @@ int main() {
 
 	Wave wave(800, 200, 100);
 
-    Level level("assets/level.json");
+	Level level("assets/level.json");
 
-    cpSpace *space = cpSpaceNew();
-    cpSpaceSetGravity(space, cpv(0, 100));
+	auto vec = sf::Vector2<double>(5, 5);
 
-    cpShape* ground = cpSegmentShapeNew(space->staticBody, cpv(-20, 50), cpv(20, 100), 0);
-    cpShapeSetFriction(ground, 1);
-    cpSpaceAddShape(space, ground);
+	while (window.isOpen())
+	{
+		sf::Event event;
 
-    float mass = 1;
-    float radius = 5;
-    float moment = cpMomentForCircle(mass, 0, radius, cpvzero);
-
-    cpBody* ballBody = cpSpaceAddBody(space, cpBodyNew(mass, moment));
-    cpBodySetPos(ballBody, cpv(0, 15));
-
-    cpShape* ballShape = cpSpaceAddShape(space, cpCircleShapeNew(ballBody, radius, cpvzero));
-    cpShapeSetFriction(ballShape, 0.7);
-
-    float time_step = 1.0 / 600.0;
-
-    sf::Texture texture;
-    sf::Sprite sprite;
-    texture.loadFromFile("assets/crab.png");
-    sprite.setTexture(texture);
+		clock_t timer_start = clock();
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
 
     while (window.isOpen())
     {
@@ -64,24 +53,20 @@ int main() {
         cpVect pos = cpBodyGetPos(ballBody);
         sprite.setRotation(cpBodyGetAngle(ballBody));
         sprite.setPosition(sf::Vector2f(pos.x, pos.y));
+		window.clear(sf::Color::Blue);
 
-	window.draw(bImage);
+		window.draw(bImage);
 		wave.update();
 
-
-		window.clear(sf::Color::Blue);
 		wave.draw(window);
-        level.update();
-        level.draw(window);
-        window.draw(sprite);
+		level.update();
+		level.draw(window);
 
 		window.display();
-    }
+		clock_t timer_end = clock();
 
-    cpShapeFree(ballShape);
-    cpBodyFree(ballBody);
-    cpShapeFree(ground);
-    cpSpaceFree(space);
+		std::cout << (float)(timer_end - timer_start)/(CLOCKS_PER_SEC/1000) << std::endl;
+	}
 
-    return 0;
+	return 0;
 }
