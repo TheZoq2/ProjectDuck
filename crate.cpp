@@ -12,7 +12,11 @@ void Crate::draw(sf::RenderWindow& window) const {
 }
 
 std::vector<sf::Vector2<int>> Crate::get_blocks() const {
-    std::vector<Block> blocks;
+    std::vector<sf::Vector2<int>> blocks;
+    int x = (int)position.x;
+    int y = (int)position.y;
+    blocks.push_back(sf::Vector2<int>(x, y));
+    return blocks;
 }
 
 sf::Vector2<double> Crate::wants_to_move() const {
