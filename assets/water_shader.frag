@@ -117,7 +117,7 @@ void main()
 		bubble8 * 0.11;
     //gl_FragColor = vec4(coord.x, coord.y, 0., iGlobalTime);
 	
-    gl_FragColor = vec4(gl_FragColor.xyz, 0.3 + gl_FragColor.x * 0.7);
+    //gl_FragColor = vec4(gl_FragColor.xyz, 0.6 + gl_FragColor.x * 0.4);
 	// Uncomment this line if you want to see just the rays:
 	//gl_FragColor = rays1 * 0.5 + rays2 * 0.5;
 	
