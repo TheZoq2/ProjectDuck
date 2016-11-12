@@ -16,6 +16,8 @@ public:
     virtual std::vector<Block> get_blocks() const override;
     virtual sf::Vector2<double> wants_to_move() const override;
 
+public:
+    sf::Sprite sprite;
 };
 
 #endif
