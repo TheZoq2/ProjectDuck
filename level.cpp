@@ -78,8 +78,6 @@ static bool water_pre_solve(cpArbiter* arb, cpSpace *space, void* ptr) {
 
 Level::Level(std::string filename)
 {
-    load_entity_textures();
-
     const auto tile_file = "assets/tiles.png";
     if (!tile_texture.loadFromFile(tile_file)) {
         cerr << "ERROR: could not load " << tile_file << std::endl;
@@ -134,8 +132,7 @@ Level::Level(std::string filename)
 
         if (type == "lever")
         {
-            sf::Sprite sprite(entity_textures["lever"]);
-            new_entity = new Lever(sprite, sf::Vector2<double>(x, y));
+            new_entity = new Lever(sf::Vector2<double>(x, y));
         } else if (type == "crab") {
             new_entity = new Crab(sf::Vector2<double>(x, y));
             this->crab = (Crab*)new_entity;
@@ -245,16 +242,6 @@ void Level::draw(sf::RenderWindow& window)
     window.draw(box_sprite2);
 }
 
-
-void Level::load_entity_textures()
-{
-    sf::Texture lever_texture;
-    if(!lever_texture.loadFromFile("assets/lever.png"))
-    {
-        std::cout << "failed to load lever texture" << std::endl;
-    }
-    this->entity_textures["lever"] = lever_texture;
-}
 
 void Level::init_physics() {
     space = cpSpaceNew();
@@ -374,7 +361,7 @@ void Level::move_camera(sf::RenderWindow& window) {
     std::cout << camera_center;
     sf::View camera_view(sf::FloatRect(0, 0, 800, 600));
     // we keep our view centered on the player
-    camera_view.move(duck->get_position().x,0);
+    camera_view.setCenter(duck->get_position().x - camera_center,300);
     window.setView(camera_view);
 }
 
@@ -385,6 +372,16 @@ void Level::update() {
         entity->set_position(entity->wants_to_move() + entity->get_position());
         if (entity->can_interact_with(
                     PlayerType::DUCK, duck->get_position())) {
+            entity->interact();
+            if (interaction_map.count(entity) == 1) {
+                // call the interact function of all the 
+                // things this entity interacts with
+                for (Entity* e : interaction_map[entity]) {
+                    e->interact();
+                }
+            }
+        } else if (entity->can_interact_with(
+                    PlayerType::CRAB, crab->get_position())) {
             entity->interact();
             if (interaction_map.count(entity) == 1) {
                 // call the interact function of all the 
