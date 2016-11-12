@@ -20,6 +20,10 @@ Wave::Wave(float length, float height, std::size_t segment_amount) :
 	this->segment_amount = segment_amount;
 	this->height = height;
 	this->segment_length = segment_length;
+
+    //Loading the water shader
+    shader.loadFromFile("assets/water_shader.vert", sf::Shader::Vertex);
+    shader.loadFromFile("assets/water_shader.frag", sf::Shader::Fragment);
 }
 
 
@@ -44,6 +48,7 @@ void Wave::draw(sf::RenderWindow& window)
 {
 	sf::RenderStates render_states;
 	render_states.transform.translate(0, 200);;
+    render_states.shader = &shader;
 
 	window.draw(this->vertices, render_states);
 }
