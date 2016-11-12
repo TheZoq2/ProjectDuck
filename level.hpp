@@ -22,7 +22,7 @@ private:
 
     std::vector<Entity*> entities;
 
-    std::map<std::string, std::vector<Entity*>> interaction_map;
+    std::map<Entity*, std::vector<Entity*>> interaction_map;
 };
 
 #endif
