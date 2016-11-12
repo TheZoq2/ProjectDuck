@@ -18,7 +18,6 @@ int main() {
 
     Level level("assets/level.json");
 
-    Crab crab;
 
     while (window.isOpen())
     {

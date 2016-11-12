@@ -1,7 +1,7 @@
 #include "crab.hpp"
 
-Crab::Crab(sf::Vector2<double>& position, sf::Vector2<double>& velocity)
-    : Entity(position, velocity, CRAB_MASS)
+Crab::Crab(sf::Vector2<double>& position)
+    : Entity(position, CRAB_MASS)
 {
     sf::Texture texture;
     texture.create(32, 32);
