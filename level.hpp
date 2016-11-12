@@ -43,7 +43,7 @@ private:
 
     void physics();
 
-    void move_camera();
+    void move_camera(sf::RenderWindow& window);
 };
 
 #endif

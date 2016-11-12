@@ -2,6 +2,8 @@
 #include "json.hpp"
 #include <fstream>
 #include <iostream>
+#include <cmath>
+#include <algorithm>    // std::max
 #include "entities/crab.hpp"
 #include "entities/duck.hpp"
 #include "entities/crate.hpp"
@@ -96,6 +98,7 @@ Level::~Level() {
 
 void Level::draw(sf::RenderWindow& window)
 {
+    move_camera(window);
 
     for (int tile_x = 0; tile_x < width; tile_x++) {
         for (int tile_y = 0; tile_y < height; tile_y++) {
@@ -128,8 +131,17 @@ void Level::physics() {
 
 }
 
-void Level::move_camera() {
+void Level::move_camera(sf::RenderWindow& window) {
+    int camera_center = ((duck->get_position().x - crab->get_position().x))/(2);
 
+    std::cout << camera_center;
+    sf::View camera_view(sf::FloatRect(0, 0, 800, 600));
+    // we keep our view centered on the player
+    camera_view.move(0,0);
+    window.setView(camera_view);
+    //mPos = sf::Mouse::getPosition(window);
+    //camera.move(mPos.x, mPox.y);
+    //window.setView(camera)
 }
 
 void Level::update() {
@@ -149,6 +161,6 @@ void Level::update() {
         }
     }
 
-    move_camera();
+
 }
 
