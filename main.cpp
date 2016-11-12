@@ -12,7 +12,7 @@ int main() {
 //	sf::Vector2i screenDimensions(800,400);
     sf::RenderWindow window(sf::VideoMode(800, 600), "Hello my friend! :)", sf::Style::Close, settings);
 
-	/*sf::Texture bTexture;
+	sf::Texture bTexture;
 	sf::Sprite bImage;
 
 	if(!bTexture.loadFromFile("assets/background.png")){
@@ -20,8 +20,8 @@ int main() {
 	}
 
 	bImage.setTexture(bTexture);
-	bImage.setScale(1.0f
-*/
+	bImage.setScale(1.0f, 600.0f/ bTexture.getSize().y);
+
 	Wave wave(800, 200, 100);
 
     Level level("assets/level.json");
@@ -41,6 +41,7 @@ int main() {
 
 		window.clear(sf::Color::Blue);
 
+	window.draw(bImage);
 		wave.update();
 
 
