@@ -45,8 +45,8 @@ Level::Level(std::string filename)
             tile_x = 0;
         }
     }
-
-
+    
+    
     //Loading entities
     auto entity_layer = level_json_data["layers"][1];
     auto entity_layer_data = entity_layer["objects"];
@@ -97,6 +97,7 @@ void Level::load_entity_textures()
 }
 
 void Level::update() {
+    // TODO collision detection
     for (Entity* entity : entities) {
         entity->set_position(entity->wants_to_move() + entity->get_position());
     }
