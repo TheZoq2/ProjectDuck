@@ -25,8 +25,6 @@ public:
 
 private:
 
-    void load_entity_textures();
-
     void init_physics();
 
     cpSpace* space;
@@ -48,8 +46,6 @@ private:
     std::map<Entity*, std::vector<Entity*>> interaction_map;
 
     sf::Texture tile_texture;
-
-    std::map<std::string, sf::Texture> entity_textures;
 
     void physics();
 
