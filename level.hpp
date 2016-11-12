@@ -36,6 +36,8 @@ private:
     sf::Texture tile_texture;
 
     std::map<std::string, sf::Texture> entity_textures;
+
+    void physics();
 };
 
 #endif
