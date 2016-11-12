@@ -7,6 +7,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 file(GLOB ProjectDuck_SRC
     "*.cpp"
     "*.hpp"
+	"entities/*.cpp"
+	"entities/*.hpp"
     )
 
 

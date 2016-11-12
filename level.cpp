@@ -2,6 +2,7 @@
 #include "json.hpp"
 #include <fstream>
 #include <iostream>
+#include "entities/lever.hpp"
 
 using namespace std;
 // For JSON parsing
@@ -58,7 +59,9 @@ Level::Level(std::string filename)
 
         if(type == "lever")
         {
-            //new_entity = new Lever()
+            sf::Sprite sprite(entity_textures["lever"]);
+            new_entity = new Lever(sprite, sf::Vector2<double>(x, y));
+			std::cout << "adding lever" << std::endl;
         }
     }
 }
