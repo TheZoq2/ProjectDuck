@@ -18,6 +18,9 @@ int main() {
 
     Level level("assets/level.json");
 
+    auto vec = sf::Vector2<double>(5, 5);
+    Crab crab(vec);
+
 
     while (window.isOpen())
     {
@@ -36,6 +39,8 @@ int main() {
 
 		wave.draw(window);
         level.draw(window);
+
+        crab.draw(window);
 
 		window.display();
     }
