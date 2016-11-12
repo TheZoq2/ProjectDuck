@@ -73,7 +73,7 @@ static bool water_pre_solve(cpArbiter* arb, cpSpace *space, void* ptr) {
 	cpFloat w_damping = cpMomentForPoly(FLUID_DRAG*FLUID_DENSITY*clippedArea, clippedCount, clipped, cpvneg(body->p));
     body->w *= cpfexp(-w_damping*dt*body->i_inv);
 
-    return cpTrue;
+    return true;
 }
 
 Level::Level(std::string filename)
@@ -259,7 +259,7 @@ void Level::load_entity_textures()
 void Level::init_physics() {
     space = cpSpaceNew();
 	cpSpaceSetIterations(space, 30);
-	cpSpaceSetGravity(space, cpv(0, -500));
+	cpSpaceSetGravity(space, cpv(0, 500));
 //	cpSpaceSetDamping(space, 0.5);
 	cpSpaceSetSleepTimeThreshold(space, 0.5f);
 	cpSpaceSetCollisionSlop(space, 0.5f);
@@ -268,32 +268,32 @@ void Level::init_physics() {
 	cpShape *shape;
 
 	// Create segments around the edge of the screen.
-	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(-320,-240), cpv(-320,240), 0.0f));
+	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(0, 0), cpv(0,600), 0.0f));
 	cpShapeSetElasticity(shape, 1.0f);
 	cpShapeSetFriction(shape, 1.0f);
 
-	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(320,-240), cpv(320,240), 0.0f));
+	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(1000, 0), cpv(1000, 600), 0.0f));
 	cpShapeSetElasticity(shape, 1.0f);
 	cpShapeSetFriction(shape, 1.0f);
 
-	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(-320,-240), cpv(320,-240), 0.0f));
+	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(0, 0), cpv(1000, 0), 0.0f));
 	cpShapeSetElasticity(shape, 1.0f);
 	cpShapeSetFriction(shape, 1.0f);
 
-	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(-320,240), cpv(320,240), 0.0f));
+	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(0, 600), cpv(1000, 600), 0.0f));
 	cpShapeSetElasticity(shape, 1.0f);
 	cpShapeSetFriction(shape, 1.0f);
 
 	{
 		// Add the edges of the bucket
-		cpBB bb = cpBBNew(-300, -200, 100, 0);
+		cpBB bb = cpBBNew(0, 200, 1000, 600);
 		cpFloat radius = 5.0f;
 
-		shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(bb.l, bb.b), cpv(bb.l, bb.t), radius));
+		shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(bb.l, bb.t), cpv(bb.l, bb.b), radius));
 		cpShapeSetElasticity(shape, 1.0f);
 		cpShapeSetFriction(shape, 1.0f);
 
-		shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(bb.r, bb.b), cpv(bb.r, bb.t), radius));
+		shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(bb.r, bb.t), cpv(bb.r, bb.b), radius));
 		cpShapeSetElasticity(shape, 1.0f);
 		cpShapeSetFriction(shape, 1.0f);
 
@@ -318,8 +318,8 @@ void Level::init_physics() {
 		cpFloat moment = cpMomentForBox(mass, width, height);
 
 		body = cpSpaceAddBody(space, cpBodyNew(mass, moment));
-		cpBodySetPos(body, cpv(-50, -100));
-		cpBodySetVel(body, cpv(0, -100));
+		cpBodySetPos(body, cpv(50, 100));
+		cpBodySetVel(body, cpv(0, 100));
 		cpBodySetAngVel(body, 1);
 
 		shape = cpSpaceAddShape(space, cpBoxShapeNew(body, width, height));
@@ -336,8 +336,8 @@ void Level::init_physics() {
 		cpFloat moment = cpMomentForBox(mass, width, height);
 
 		body = cpSpaceAddBody(space, cpBodyNew(mass, moment));
-		cpBodySetPos(body, cpv(-200, -50));
-		cpBodySetVel(body, cpv(0, -100));
+		cpBodySetPos(body, cpv(200, 50));
+		cpBodySetVel(body, cpv(0, 100));
 		cpBodySetAngVel(body, 1);
 
 		shape = cpSpaceAddShape(space, cpBoxShapeNew(body, width, height));
@@ -351,6 +351,11 @@ void Level::init_physics() {
 }
 
 void Level::physics() {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        cpBodySetVel(box_body1, cpv(0, -100));
+        cpBodySetAngVel(box_body1, 1);
+    }
+
     float time_step = 1.0f / 60.0f;
     cpSpaceStep(space, time_step);
 
