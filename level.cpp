@@ -122,6 +122,10 @@ void Level::load_entity_textures()
     this->entity_textures["lever"] = lever_texture;
 }
 
+void Level::physics() {
+
+}
+
 void Level::update() {
     // TODO collision detection
     for (Entity* entity : entities) {
