@@ -27,8 +27,6 @@ public:
 
 private:
 
-    void load_entity_textures();
-
     void init_physics();
 
     cpSpace* space;
@@ -51,13 +49,11 @@ private:
 
     sf::Texture tile_texture;
 
-    std::map<std::string, sf::Texture> entity_textures;
-
     std::vector<AudioZone> audio_zones;
 
     void physics();
 
-    void move_camera();
+    void move_camera(sf::RenderWindow& window);
 };
 
 #endif
