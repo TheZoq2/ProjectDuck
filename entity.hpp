@@ -13,7 +13,7 @@ public:
             sf::Vector2<double>& velocity, int mass);
     virtual ~Entity() {}
 
-    virtual void draw(sf::Window& window) const = 0;
+    virtual void draw(sf::RenderWindow& window) const = 0;
     virtual std::vector<Block> get_blocks() const = 0;
 
     /*
