@@ -45,6 +45,21 @@
                  "width":0,
                  "x":278,
                  "y":14
+                }, 
+                {
+                 "height":0,
+                 "id":12,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"duck",
+                 "visible":true,
+                 "width":0,
+                 "x":346,
+                 "y":56
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -53,7 +68,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":12,
+ "nextobjectid":13,
  "orientation":"orthogonal",
  "properties":
     {

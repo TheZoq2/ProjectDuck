@@ -4,10 +4,13 @@
 Duck::Duck(sf::Vector2<double> position)
     : Entity(position, DUCK_MASS)
 {
+    texture.loadFromFile("assets/duck.png");
+    sprite.setTexture(texture);
 }
 
 void Duck::draw(sf::RenderWindow& window) {
-    // TODO implement
+    sprite.setPosition(position.x, position.y);
+    window.draw(sprite);
 }
 
 std::vector<sf::Vector2<int>> Duck::get_blocks() const {
@@ -19,7 +22,7 @@ sf::Vector2<double> Duck::wants_to_move() const {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)) {
         velocity.x -= 1;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
         velocity.x += 1;
     }
     return velocity;
