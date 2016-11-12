@@ -15,6 +15,7 @@ class Level {
 public:
 
     Level(std::string filename);
+    ~Level();
 
     void draw(sf::RenderWindow& window);
 
@@ -24,7 +25,7 @@ private:
 
     int width, height;
 
-    std::vector<std::vector<Block>> grid;
+    std::vector<std::vector<Block*>> grid;
 
     std::vector<Entity*> entities;
 
