@@ -62,6 +62,7 @@ int main() {
 
         cpSpaceStep(space, time_step);
         cpVect pos = cpBodyGetPos(ballBody);
+        sprite.setRotation(cpBodyGetAngle(ballBody));
         sprite.setPosition(sf::Vector2f(pos.x, pos.y));
 
 	window.draw(bImage);
