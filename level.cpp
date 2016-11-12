@@ -8,6 +8,7 @@
 #include "entities/duck.hpp"
 #include "entities/crate.hpp"
 #include "entities/lever.hpp"
+#include "entities/wall.hpp"
 
 using namespace std;
 // For JSON parsing
@@ -66,18 +67,22 @@ Level::Level(std::string filename)
         std::string type = entity["type"];
 
         Entity* new_entity = nullptr;
+        
+        sf::Vector2<double> pos(x, y);
 
         if (type == "lever")
         {
-            new_entity = new Lever(sf::Vector2<double>(x, y));
+            new_entity = new Lever(pos);
         } else if (type == "crab") {
-            new_entity = new Crab(sf::Vector2<double>(x, y));
+            new_entity = new Crab(pos);
             this->crab = (Crab*)new_entity;
         } else if (type == "duck") {
-            new_entity = new Duck(sf::Vector2<double>(x, y));
+            new_entity = new Duck(pos);
             this->duck = (Duck*)new_entity;
         } else if (type == "crate") {
-            new_entity = new Crate(sf::Vector2<double>(x, y));
+            new_entity = new Crate(pos);
+        } else if (type == "wall") {
+            new_entity = new Wall(pos, entity["height"], entity["width"]);
         }
 
         if (new_entity != nullptr)
