@@ -67,7 +67,7 @@
                  "name":"",
                  "properties":
                     {
-                     "audio_name":"VladGetOutOfShip.ogg",
+                     "audio_name":"MotherIsTrash.ogg",
                      "crab":true,
                      "duck":true
                     },
@@ -80,7 +80,7 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":25,
+                 "width":80,
                  "x":420,
                  "y":2
                 }],
