@@ -195,7 +195,7 @@ void Level::move_camera(sf::RenderWindow& window) {
     std::cout << camera_center;
     sf::View camera_view(sf::FloatRect(0, 0, 800, 600));
     // we keep our view centered on the player
-    camera_view.move(duck->get_position().x,0);
+    camera_view.setCenter(duck->get_position().x - camera_center,300);
     window.setView(camera_view);
 }
 
