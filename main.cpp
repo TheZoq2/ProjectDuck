@@ -44,12 +44,12 @@ int main() {
 
 		window.clear(sf::Color::Blue);
 
-		window.draw(bImage);
+		//window.draw(bImage);
 		wave.update();
 
 		level.update();
-		level.draw(window);
 		wave.draw(window);
+		level.draw(window);
 
 		window.display();
 

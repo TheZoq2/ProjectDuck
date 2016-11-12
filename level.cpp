@@ -238,15 +238,39 @@ void Level::draw(sf::RenderWindow& window)
         entity->draw(window);
     }
 
-    window.draw(box_sprite1);
-    window.draw(box_sprite2);
+    sf::Vertex line[] = {
+        sf::Vertex(sf::Vector2f(400, 200)),
+        sf::Vertex(sf::Vector2f(400, 600)),
+        sf::Vertex(sf::Vector2f(1200, 600)),
+        sf::Vertex(sf::Vector2f(1200, 200))
+    };
+    window.draw(line, 4, sf::Lines);
+
+    sf::RectangleShape rectangle1(sf::Vector2f(200, 50));
+    sf::RectangleShape rectangle2(sf::Vector2f(40, 80));
+    rectangle1.setOrigin(100, 25);
+    rectangle2.setOrigin(20, 40);
+
+    cpVect pos = cpBodyGetPos(box_body1);
+    rectangle1.setRotation(cpBodyGetAngle(box_body1));
+    rectangle1.setPosition(sf::Vector2f(pos.x, pos.y));
+
+    pos = cpBodyGetPos(box_body2);
+    rectangle2.setRotation(cpBodyGetAngle(box_body2));
+    rectangle2.setPosition(sf::Vector2f(pos.x, pos.y));
+
+    window.draw(rectangle1);
+    window.draw(rectangle2);
+
+    // window.draw(box_sprite1);
+    // window.draw(box_sprite2);
 }
 
 
 void Level::init_physics() {
     space = cpSpaceNew();
 	cpSpaceSetIterations(space, 30);
-	cpSpaceSetGravity(space, cpv(0, 500));
+	cpSpaceSetGravity(space, cpv(0, -500));
 //	cpSpaceSetDamping(space, 0.5);
 	cpSpaceSetSleepTimeThreshold(space, 0.5f);
 	cpSpaceSetCollisionSlop(space, 0.5f);
@@ -255,7 +279,7 @@ void Level::init_physics() {
 	cpShape *shape;
 
 	// Create segments around the edge of the screen.
-	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(0, 0), cpv(0,600), 0.0f));
+	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(0, 0), cpv(0, 600), 0.0f));
 	cpShapeSetElasticity(shape, 1.0f);
 	cpShapeSetFriction(shape, 1.0f);
 
@@ -273,7 +297,7 @@ void Level::init_physics() {
 
 	{
 		// Add the edges of the bucket
-		cpBB bb = cpBBNew(0, 200, 1000, 600);
+		cpBB bb = cpBBNew(400, 200, 1200, 600);
 		cpFloat radius = 5.0f;
 
 		shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(bb.l, bb.t), cpv(bb.l, bb.b), radius));
@@ -305,7 +329,7 @@ void Level::init_physics() {
 		cpFloat moment = cpMomentForBox(mass, width, height);
 
 		body = cpSpaceAddBody(space, cpBodyNew(mass, moment));
-		cpBodySetPos(body, cpv(50, 100));
+		cpBodySetPos(body, cpv(700, 100));
 		cpBodySetVel(body, cpv(0, 100));
 		cpBodySetAngVel(body, 1);
 
@@ -314,6 +338,7 @@ void Level::init_physics() {
 
         box_body1 = body;
         box_sprite1.setScale(width/32.0f, height/32.0f);
+        box_sprite1.setOrigin(16, 16);
 	}
 
 	{
@@ -323,7 +348,7 @@ void Level::init_physics() {
 		cpFloat moment = cpMomentForBox(mass, width, height);
 
 		body = cpSpaceAddBody(space, cpBodyNew(mass, moment));
-		cpBodySetPos(body, cpv(200, 50));
+		cpBodySetPos(body, cpv(800, 50));
 		cpBodySetVel(body, cpv(0, 100));
 		cpBodySetAngVel(body, 1);
 
@@ -332,6 +357,7 @@ void Level::init_physics() {
 
         box_body2 = body;
         box_sprite2.setScale(width/32.0f, height/32.0f);
+        box_sprite2.setOrigin(16, 16);
 	}
 
     cpSpaceAddCollisionHandler(space, 1, 0, NULL, (cpCollisionPreSolveFunc)water_pre_solve, NULL, NULL, NULL);
@@ -340,7 +366,7 @@ void Level::init_physics() {
 void Level::physics() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         cpBodySetVel(box_body1, cpv(0, -100));
-        cpBodySetAngVel(box_body1, 1);
+        cpBodySetAngVel(box_body1, 10);
     }
 
     float time_step = 1.0f / 60.0f;
