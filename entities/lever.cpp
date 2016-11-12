@@ -12,8 +12,6 @@ Lever::Lever(sf::Sprite sprite, sf::Vector2<double> position) :
 void Lever::draw(sf::RenderWindow& window) const 
 {
     window.draw(sprite);
-
-	std::cout << sprite.getPosition().x << " " << sprite.getPosition().y << std::endl;
 }
 
 std::vector<sf::Vector2<int>> Lever::get_blocks() const
