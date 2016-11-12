@@ -26,7 +26,7 @@ int main() {
 	bImage.setTexture(bTexture);
 	bImage.setScale(1.0f, 600.0f/ bTexture.getSize().y);
 
-	Wave wave(800, 200, 100);
+	Wave wave(800, 400, 100);
 
 	Level level("assets/level.json");
 
@@ -76,10 +76,10 @@ int main() {
 		window.draw(bImage);
 		wave.update();
 
-		wave.draw(window);
 		level.update();
 		level.draw(window);
         window.draw(sprite);
+		wave.draw(window);
 
 		window.display();
 
