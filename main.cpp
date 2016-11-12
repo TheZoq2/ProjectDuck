@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 #include "entity.hpp"
 #include "duck.hpp"
 #include "level.hpp"
@@ -8,7 +9,7 @@ int main() {
 
     std::cout << "Hello World!" << std::endl;
 
-    sf::Window window(sf::VideoMode(800, 600), "Hello my friend! :)", sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Hello my friend! :)", sf::Style::Close);
 
     Level level;
 
@@ -21,7 +22,11 @@ int main() {
                 window.close();
         }
 
+	window.clear(sf::Color::Black);
+
         level.draw(window);
+
+	window.display();
     }
     return 0;
 }
