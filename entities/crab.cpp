@@ -18,5 +18,10 @@ std::vector<sf::Vector2<int>> Crab::get_blocks() const {
 }
 
 sf::Vector2<double> Crab::wants_to_move() const {
-    // TODO implement
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+        return sf::Vector2<double>(-1, 0);
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        return sf::Vector2<double>(1, 0);
+    }
+    return sf::Vector2<double>(0, 0);
 }
