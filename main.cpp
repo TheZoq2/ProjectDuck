@@ -1,32 +1,42 @@
 #include <iostream>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+
+#include  "wave.h"
 #include "entity.hpp"
 #include "duck.hpp"
 #include "level.hpp"
 
 int main() {
+	sf::ContextSettings settings;
+	settings.antialiasingLevel = 16;
 
-    std::cout << "Hello World!" << std::endl;
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Hello my friend! :)", sf::Style::Close, settings);
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Hello my friend! :)", sf::Style::Close);
+	Wave wave(800, 200, 100);
 
     Level level("assets/level.json");
 
     while (window.isOpen())
     {
         sf::Event event;
+
+
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
 
-	window.clear(sf::Color::Black);
+		window.clear(sf::Color::Black);
+
+		wave.update();
 
         level.draw(window);
+		wave.draw(window);
 
-	window.display();
+		window.display();
     }
+
     return 0;
 }
