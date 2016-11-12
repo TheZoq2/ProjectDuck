@@ -13,6 +13,8 @@ using namespace nlohmann;
 
 Level::Level(std::string filename)
 {
+    load_entity_textures();
+
     const auto tile_file = "assets/tiles.png";
     if (!tile_texture.loadFromFile(tile_file)) {
         cerr << "ERROR: could not load " << tile_file << std::endl;
@@ -113,7 +115,10 @@ void Level::draw(sf::RenderWindow& window)
 void Level::load_entity_textures()
 {
     sf::Texture lever_texture;
-    lever_texture.loadFromFile("assets/lever.png");
+    if(!lever_texture.loadFromFile("assets/lever.png"))
+    {
+        std::cout << "failed to load lever texture" << std::endl;
+    }
     this->entity_textures["lever"] = lever_texture;
 }
 
