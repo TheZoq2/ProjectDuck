@@ -24,8 +24,8 @@
                  "type":"lever",
                  "visible":true,
                  "width":31,
-                 "x":226,
-                 "y":324
+                 "x":161,
+                 "y":-1
                 }],
          "opacity":1,
          "type":"objectgroup",
