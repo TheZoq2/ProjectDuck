@@ -1,14 +1,13 @@
 #include <iostream>
 #include <SFML/Window.hpp>
-#include "entity.h"
-#include "duck.h"
-#include "level.h"
+#include <SFML/Graphics.hpp>
+
 #include  "wave.h"
+#include "entity.hpp"
+#include "duck.hpp"
+#include "level.hpp"
 
 int main() {
-
-    std::cout << "Hello World!" << std::endl;
-
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 16;
 
@@ -16,21 +15,27 @@ int main() {
 
 	Wave wave(800, 200, 100);
 
+    Level level("assets/level.json");
+
     while (window.isOpen())
     {
         sf::Event event;
-		window.clear();
 
-		wave.draw(window);
-		wave.update();
-
-		window.display();
 
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+
+		window.clear(sf::Color::Black);
+
+		wave.update();
+
+        level.draw(window);
+		wave.draw(window);
+
+		window.display();
     }
 
     return 0;

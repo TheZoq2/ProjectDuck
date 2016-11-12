@@ -4,9 +4,9 @@ project(ProjectDuck)
 set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS} -g -ftest-coverage -fprofile-arcs -Wall -Wextra -Wno-unused -pedantic")
 # set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-file(GLOB ProjectDuck_SRC 
+file(GLOB ProjectDuck_SRC
     "*.cpp"
-    "*.h"
+    "*.hpp"
     )
 
 
