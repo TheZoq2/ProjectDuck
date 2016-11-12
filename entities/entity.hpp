@@ -5,6 +5,8 @@
 #include <vector>
 #include "block.hpp"
 
+enum PlayerType {DUCK, CRAB};
+
 class Entity {
 
 public:
@@ -20,6 +22,10 @@ public:
      * in which it wants to move.
      */
     virtual sf::Vector2<double> wants_to_move() const = 0;
+    virtual void interact();
+
+    virtual bool 
+        can_interact_with(PlayerType type, sf::Vector2<double> position);
 
     sf::Vector2<double> get_position() const;
     void set_position(const sf::Vector2<double>& position);

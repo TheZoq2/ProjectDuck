@@ -5,6 +5,14 @@ Entity::Entity(sf::Vector2<double>& position, int mass) {
     this->position = position;
 }
 
+bool Entity::can_interact_with(PlayerType type, 
+        sf::Vector2<double> position) {
+    return false;
+}
+
+// does nothing by default
+void Entity::interact() {}
+
 sf::Vector2<double> Entity::get_position() const {
     return position;
 }
