@@ -76,10 +76,10 @@ int main() {
 		window.draw(bImage);
 		wave.update();
 
-		wave.draw(window);
 		level.update();
 		level.draw(window);
         window.draw(sprite);
+		wave.draw(window);
 
 		window.display();
 

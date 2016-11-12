@@ -117,18 +117,16 @@ void main()
 		bubble8 * 0.11;
     //gl_FragColor = vec4(coord.x, coord.y, 0., iGlobalTime);
 	
-    gl_FragColor = vec4(gl_FragColor.xyz, 0.4);
+    gl_FragColor = vec4(gl_FragColor.xyz, 0.3 + gl_FragColor.x * 0.7);
 	// Uncomment this line if you want to see just the rays:
 	//gl_FragColor = rays1 * 0.5 + rays2 * 0.5;
 	
 	// Attenuate brightness towards the bottom, simulating light-loss due to depth.
 	// Give the whole thing a blue-green tinge as well.
-	//float brightness = 1.0 - (coord.y);
-	//gl_FragColor.x *= 0.2 + (brightness * 0.8);
-	//gl_FragColor.y *= 0.3 + (brightness * 0.7);
-	//gl_FragColor.z *= 0.4 + (brightness * 0.6);
-
-    //gl_FragColor.x = coord.y;
+	float brightness = 1.0 - (coord.y / iResolution.y);
+	gl_FragColor.x *= 0.2 + (brightness * 0.8);
+	gl_FragColor.y *= 0.5 + (brightness * 0.7);
+	gl_FragColor.z *= 0.6 + (brightness * 0.6);
 }
 
 
