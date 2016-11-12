@@ -1,12 +1,12 @@
 #include "duck.hpp"
 #include <SFML/System.hpp>
 
-Duck::Duck(sf::Vector2<double>& position)
+Duck::Duck(sf::Vector2<double> position)
     : Entity(position, DUCK_MASS)
 {
 }
 
-void Duck::draw(sf::RenderWindow& window) const {
+void Duck::draw(sf::RenderWindow& window) {
     // TODO implement
 }
 

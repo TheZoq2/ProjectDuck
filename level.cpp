@@ -2,6 +2,9 @@
 #include "json.hpp"
 #include <fstream>
 #include <iostream>
+#include "entities/crab.hpp"
+#include "entities/duck.hpp"
+#include "entities/crate.hpp"
 #include "entities/lever.hpp"
 
 using namespace std;
@@ -60,13 +63,19 @@ Level::Level(std::string filename)
 
         Entity* new_entity = nullptr;
 
-        if(type == "lever")
+        if (type == "lever")
         {
             sf::Sprite sprite(entity_textures["lever"]);
             new_entity = new Lever(sprite, sf::Vector2<double>(x, y));
-        }
+        } else if (type == "crab") {
+            new_entity = new Crab(sf::Vector2<double>(x, y));
+        } else if (type == "duck") {
+            new_entity = new Duck(sf::Vector2<double>(x, y));
+        } else if (type == "crate") {
+            new_entity = new Crate(sf::Vector2<double>(x, y));
+        } 
 
-        if(new_entity != nullptr)
+        if (new_entity != nullptr)
         {
             entities.push_back(new_entity);
         }

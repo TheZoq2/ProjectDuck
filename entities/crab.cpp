@@ -1,14 +1,16 @@
 #include "crab.hpp"
 
-Crab::Crab(sf::Vector2<double>& position)
+Crab::Crab(sf::Vector2<double> position)
     : Entity(position, CRAB_MASS)
 {
-    texture.create(32, 32);
+    
+    texture.loadFromFile("assets/crab.png");
     sprite.setTexture(texture);
-    //sprite.setColor(sf::Color(255, 255, 255));
+    sprite.setColor(sf::Color(255, 255, 255));
 }
 
-void Crab::draw(sf::RenderWindow& window) const {
+void Crab::draw(sf::RenderWindow& window) {
+    sprite.setPosition(position.x, position.y);
     window.draw(sprite);
 }
 

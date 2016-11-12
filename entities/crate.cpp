@@ -1,13 +1,13 @@
 #include "crate.hpp"
 
-Crate::Crate(sf::Vector2<double>& position) : Entity(position, CRATE_MASS) {
+Crate::Crate(sf::Vector2<double> position) : Entity(position, CRATE_MASS) {
     sf::Texture texture;
     texture.create(32, 32);
 
     sprite.setTexture(texture);
 }
 
-void Crate::draw(sf::RenderWindow& window) const {
+void Crate::draw(sf::RenderWindow& window) {
     window.draw(sprite);
 }
 
