@@ -18,5 +18,7 @@ private:
 	float internal_time = 0;
 
 	std::size_t segment_amount;
+
+    sf::Shader shader;
 };
 #endif
