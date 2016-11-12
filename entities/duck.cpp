@@ -20,10 +20,10 @@ std::vector<sf::Vector2<int>> Duck::get_blocks() const {
 sf::Vector2<double> Duck::wants_to_move() const {
     sf::Vector2<double> velocity;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)) {
-        velocity.x -= 1;
+        velocity.x -= DUCK_CRAB_SPEED;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
-        velocity.x += 1;
+        velocity.x += DUCK_CRAB_SPEED;
     }
     return velocity;
 }
