@@ -9,8 +9,8 @@ class Duck : public Entity {
 
 public:
     
-    Duck(sf::Vector2<double>& position, sf::Vector2<double>& velocity) 
-        : Entity(position, velocity, DUCK_MASS) {}
+    Duck(sf::Vector2<double>& position) 
+        : Entity(position, DUCK_MASS) {}
 
     virtual void draw(sf::RenderWindow& window) const override;
     virtual std::vector<Block> get_blocks() const override;
