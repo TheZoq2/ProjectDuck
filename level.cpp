@@ -28,12 +28,15 @@ Level::Level(std::string filename)
 
     int tile_x = 0, tile_y = 0;
     for (int tile_index : tile_layer_data) {
-        sf::Sprite sprite;
-        sprite.setTexture(tile_texture);
-        sprite.setTextureRect(sf::IntRect(tile_index * TILE_SIZE, 0, TILE_SIZE, TILE_SIZE));
-        sprite.setPosition(sf::Vector2f(tile_x * TILE_SIZE, tile_y * TILE_SIZE));
+        Block* block = nullptr;
+        if (tile_index != 0) {
+            sf::Sprite sprite;
+            sprite.setTexture(tile_texture);
+            sprite.setTextureRect(sf::IntRect((tile_index - 1) * TILE_SIZE, 0, TILE_SIZE, TILE_SIZE));
+            sprite.setPosition(sf::Vector2f(tile_x * TILE_SIZE, tile_y * TILE_SIZE));
 
-        Block block(sprite);
+            block = new Block(sprite);
+        }
         grid[tile_x].push_back(block);
 
         tile_x++;
@@ -70,12 +73,22 @@ Level::Level(std::string filename)
     }
 }
 
+Level::~Level() {
+    for (auto col : grid) {
+        for (auto block : col) {
+            delete block;
+        }
+    }
+}
+
 void Level::draw(sf::RenderWindow& window)
 {
 
     for (int tile_x = 0; tile_x < width; tile_x++) {
         for (int tile_y = 0; tile_y < height; tile_y++) {
-            grid[tile_x][tile_y].draw(window, sf::Vector2i(tile_x * TILE_SIZE, tile_y * TILE_SIZE));
+            Block* block = grid[tile_x][tile_y];
+            if (block != nullptr)
+                block->draw(window, sf::Vector2i(tile_x * TILE_SIZE, tile_y * TILE_SIZE));
         }
     }
 
@@ -94,3 +107,10 @@ void Level::load_entity_textures()
     lever_texture.loadFromFile("assets/lever.png");
     this->entity_textures["lever"] = lever_texture;
 }
+
+void Level::update() {
+    for (Entity* entity : entities) {
+        entity->set_position(entity->wants_to_move() + entity->get_position());
+    }
+}
+
