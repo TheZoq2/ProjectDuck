@@ -27,6 +27,8 @@ private:
     std::vector<Entity*> entities;
 
     std::map<Entity*, std::vector<Entity*>> interaction_map;
+
+    sf::Texture tile_texture;
 };
 
 #endif

@@ -34,8 +34,8 @@ int main() {
 
 		wave.update();
 
-        level.draw(window);
 		wave.draw(window);
+        level.draw(window);
 
 		window.display();
     }
