@@ -2,6 +2,7 @@
 #define CRAB_H
 
 #include "entity.hpp"
+#include "constants.hpp"
 
 const static int CRAB_MASS = 3;
 

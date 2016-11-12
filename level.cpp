@@ -50,8 +50,10 @@ Level::Level(std::string filename)
             tile_x = 0;
         }
     }
-    
-    
+
+    init_physics();
+
+
     //Loading entities
     auto entity_layer = level_json_data["layers"][1];
     auto entity_layer_data = entity_layer["objects"];
@@ -71,11 +73,13 @@ Level::Level(std::string filename)
             new_entity = new Lever(sprite, sf::Vector2<double>(x, y));
         } else if (type == "crab") {
             new_entity = new Crab(sf::Vector2<double>(x, y));
+            this->crab = (Crab*)new_entity;
         } else if (type == "duck") {
             new_entity = new Duck(sf::Vector2<double>(x, y));
+            this->duck = (Duck*)new_entity;
         } else if (type == "crate") {
             new_entity = new Crate(sf::Vector2<double>(x, y));
-        } 
+        }
 
         if (new_entity != nullptr)
         {
@@ -85,9 +89,26 @@ Level::Level(std::string filename)
 
     //Loading audio zones
     auto audio_layer = level_json_data["layers"][2];
-    auto audio_layer_data = entity_layer["objects"];
+    auto audio_layer_data = audio_layer["objects"];
 
-    for(auto zone : entity_layer_data)
+    std::cout << audio_layer["name"] << std::endl;
+
+    for(auto zone : audio_layer_data)
+    {
+        int height = zone["height"];
+        int width = zone["width"];
+        int x = zone["x"];
+        int y = zone["y"];
+
+        auto properties = zone["properties"];
+        std::string filename = properties["audio_name"];
+        bool duck = true;
+        bool crab = true;
+
+        AudioZone result(sf::Vector2<double>(x, y), sf::Vector2<double>(width, height), duck, crab, "assets/" + filename);
+
+        this->audio_zones.push_back(result);
+    }
 }
 
 Level::~Level() {
@@ -96,6 +117,11 @@ Level::~Level() {
             delete block;
         }
     }
+
+    cpShapeFree(ball_shape);
+    cpBodyFree(ball_body);
+    cpShapeFree(ground);
+    cpSpaceFree(space);
 }
 
 void Level::draw(sf::RenderWindow& window)
@@ -115,6 +141,7 @@ void Level::draw(sf::RenderWindow& window)
         entity->draw(window);
     }
 
+    window.draw(ball_sprite);
 }
 
 
@@ -128,14 +155,65 @@ void Level::load_entity_textures()
     this->entity_textures["lever"] = lever_texture;
 }
 
+void Level::init_physics() {
+    // Create physics stuff
+    space = cpSpaceNew();
+    cpSpaceSetGravity(space, cpv(0, 100));
+
+    ground = cpSegmentShapeNew(space->staticBody, cpv(-20, 50), cpv(20, 100), 0);
+    cpShapeSetFriction(ground, 1);
+    cpSpaceAddShape(space, ground);
+
+    float mass = 1;
+    float radius = 5;
+    float moment = cpMomentForCircle(mass, 0, radius, cpvzero);
+
+    ball_body = cpSpaceAddBody(space, cpBodyNew(mass, moment));
+    cpBodySetPos(ball_body, cpv(0, 15));
+
+    ball_shape = cpSpaceAddShape(space, cpCircleShapeNew(ball_body, radius, cpvzero));
+    cpShapeSetFriction(ball_shape, 0.7);
+
+    ball_texture.loadFromFile("assets/crab.png");
+    ball_sprite.setTexture(ball_texture);
+}
+
 void Level::physics() {
+    float time_step = 1.0f / 60.0f;
+    cpSpaceStep(space, time_step);
+    cpVect pos = cpBodyGetPos(ball_body);
+    ball_sprite.setRotation(cpBodyGetAngle(ball_body));
+    ball_sprite.setPosition(sf::Vector2f(pos.x, pos.y));
+}
+
+void Level::move_camera() {
 
 }
 
 void Level::update() {
+    physics();
     // TODO collision detection
     for (Entity* entity : entities) {
         entity->set_position(entity->wants_to_move() + entity->get_position());
+        if (entity->can_interact_with(
+                    PlayerType::DUCK, duck->get_position())) {
+            entity->interact();
+            if (interaction_map.count(entity) == 1) {
+                // call the interact function of all the 
+                // things this entity interacts with
+                for (Entity* e : interaction_map[entity]) {
+                    e->interact();
+                }
+            }
+        }
+    }
+
+    move_camera();
+
+
+    for(auto zone : audio_zones)
+    {
+        zone.try_play(crab->get_position(), duck->get_position());
     }
 }
 
