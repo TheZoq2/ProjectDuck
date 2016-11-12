@@ -12,9 +12,9 @@ void Lever::draw(sf::RenderWindow& window) const
     window.draw(sprite);
 }
 
-std::vector<Block> Lever::get_blocks() const
+std::vector<sf::Vector2<int>> Lever::get_blocks() const
 {
-    return std::vector<Block>();
+    return std::vector<sf::Vector2<int>>();
 }
 
 sf::Vector2<double> Lever::wants_to_move() const
