@@ -40,8 +40,8 @@ private:
 
     int width, height;
 
-    Duck* duck;
-    Crab* crab;
+    Duck* duck = nullptr;
+    Crab* crab = nullptr;
 
     std::vector<std::vector<Block*>> grid;
 
