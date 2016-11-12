@@ -9,7 +9,8 @@ class Entity {
 
 public:
 
-    Entity();
+    Entity(sf::Vector2<double>& position,
+            sf::Vector2<double>& velocity, int mass);
     ~Entity();
 
     virtual void draw(sf::Window& window) const = 0;
