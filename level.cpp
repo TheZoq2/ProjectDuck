@@ -9,9 +9,8 @@ using namespace nlohmann;
 
 Level::Level(std::string filename)
 {
-    sf::Texture texture;
     const auto tile_file = "assets/tiles.png";
-    if (!texture.loadFromFile(tile_file)) {
+    if (!tile_texture.loadFromFile(tile_file)) {
         cerr << "ERROR: could not load " << tile_file << std::endl;
     }
 
@@ -19,7 +18,7 @@ Level::Level(std::string filename)
     json level_json_data;
     file >> level_json_data;
     auto layer = level_json_data["layers"][0];
-    auto layer_data = level_json_data["data"];
+    auto layer_data = layer["data"];
 
     width = layer["width"];
     height = layer["height"];
@@ -29,7 +28,7 @@ Level::Level(std::string filename)
     int tile_x = 0, tile_y = 0;
     for (int tile_index : layer_data) {
         sf::Sprite sprite;
-        sprite.setTexture(texture);
+        sprite.setTexture(tile_texture);
         sprite.setTextureRect(sf::IntRect(tile_index * TILE_SIZE, 0, TILE_SIZE, TILE_SIZE));
         sprite.setPosition(sf::Vector2f(tile_x * TILE_SIZE, tile_y * TILE_SIZE));
 
@@ -37,7 +36,7 @@ Level::Level(std::string filename)
         grid[tile_x].push_back(block);
 
         tile_x++;
-        if (tile_x > width) {
+        if (tile_x >= width) {
             tile_y++;
             tile_x = 0;
         }
