@@ -3,10 +3,8 @@
 #include <SFML/Graphics.hpp>
 
 #include "wave.h"
-#include "entity.hpp"
-#include "duck.hpp"
+#include "entities/entity.hpp"
 #include "level.hpp"
-#include "crab.hpp"
 
 int main() {
 	sf::ContextSettings settings;

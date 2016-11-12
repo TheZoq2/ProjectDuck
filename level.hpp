@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include "entity.hpp"
+#include "entities/entity.hpp"
 #include <map>
 #include <string>
 #include "block.hpp"
