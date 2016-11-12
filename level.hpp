@@ -9,6 +9,7 @@
 #include "block.hpp"
 #include "constants.hpp"
 
+
 class Level {
 
 public:
@@ -19,6 +20,8 @@ public:
 
 private:
 
+    void load_entity_textures();
+
     int width, height;
 
     std::vector<std::vector<Block>> grid;
@@ -28,6 +31,8 @@ private:
     std::map<Entity*, std::vector<Entity*>> interaction_map;
 
     sf::Texture tile_texture;
+
+    std::map<std::string, sf::Texture> entity_textures;
 };
 
 #endif

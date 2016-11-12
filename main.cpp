@@ -2,7 +2,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-#include  "wave.h"
+#include "wave.h"
 #include "entity.hpp"
 #include "duck.hpp"
 #include "level.hpp"
@@ -13,6 +13,10 @@ int main() {
 	settings.antialiasingLevel = 16;
 
     sf::RenderWindow window(sf::VideoMode(800, 600), "Hello my friend! :)", sf::Style::Close, settings);
+sf::View viewLeft(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y/2));
+viewLeft.setViewport(sf::FloatRect(0, 0, 1, 0.5));
+sf::View viewRight(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y/2));
+viewRight.setViewport(sf::FloatRect(0, 0.5, 1, 0.5));
 
 	Wave wave(800, 200, 100);
 
@@ -33,15 +37,20 @@ int main() {
                 window.close();
         }
 
-		window.clear(sf::Color::Black);
+		window.clear(sf::Color::Blue);
 
 		wave.update();
+
 
 		wave.draw(window);
         level.draw(window);
 
         crab.draw(window);
 
+window.setView(viewLeft);
+//window.draw(leftSprite);
+window.setView(viewRight);
+//window.draw(rightSprite);
 		window.display();
     }
 
