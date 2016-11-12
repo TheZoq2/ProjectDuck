@@ -23,5 +23,6 @@ private:
     bool crab;
 
     sf::SoundBuffer sound_buffer;
+    sf::Sound sound;
 };
 #endif
