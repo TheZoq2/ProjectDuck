@@ -82,6 +82,12 @@ Level::Level(std::string filename)
             entities.push_back(new_entity);
         }
     }
+
+    //Loading audio zones
+    auto audio_layer = level_json_data["layers"][2];
+    auto audio_layer_data = entity_layer["objects"];
+
+    for(auto zone : entity_layer_data)
 }
 
 Level::~Level() {

@@ -8,6 +8,7 @@
 #include <string>
 #include "block.hpp"
 #include "constants.hpp"
+#include "audio_zone.hpp"
 
 
 class Level {
@@ -36,6 +37,8 @@ private:
     sf::Texture tile_texture;
 
     std::map<std::string, sf::Texture> entity_textures;
+
+    std::vector<AudioZone> audio_zones;
 
     void physics();
 };
