@@ -13,7 +13,8 @@ public:
     virtual ~Entity() {}
 
     virtual void draw(sf::RenderWindow& window) const = 0;
-    virtual std::vector<Block> get_blocks() const = 0;
+    virtual std::vector<Block> 
+        get_blocks(int grid_height, int grid_width) const = 0;
 
     /*
      * Gets the velocity vector of the direction and speed

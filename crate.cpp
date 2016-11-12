@@ -11,7 +11,7 @@ void Crate::draw(sf::RenderWindow& window) const {
     window.draw(sprite);
 }
 
-std::vector<Block> Crate::get_blocks() const {
+std::vector<Block> Crate::get_blocks(int grid_height, int grid_width) const {
     // TODO implement
 }
 

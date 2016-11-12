@@ -10,7 +10,8 @@ public:
     
     Crate(sf::Vector2<double>& position);
     virtual void draw(sf::RenderWindow& window) const override;
-    virtual std::vector<Block> get_blocks() const override;
+    virtual std::vector<Block> get_blocks(int grid_height, int grid_width)
+        const override;
     virtual sf::Vector2<double> wants_to_move() const override;
 
 private:

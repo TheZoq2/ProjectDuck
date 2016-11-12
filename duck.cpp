@@ -4,7 +4,7 @@ void Duck::draw(sf::RenderWindow& window) const {
     // TODO implement
 }
 
-std::vector<Block> Duck::get_blocks() const {
+std::vector<Block> Duck::get_blocks(int grid_height, int grid_width) const {
     // TODO implement
 }
 

@@ -13,7 +13,7 @@ void Crab::draw(sf::RenderWindow& window) const {
     window.draw(sprite);
 }
 
-std::vector<Block> Crab::get_blocks() const {
+std::vector<Block> Crab::get_blocks(int grid_height, int grid_width) const {
     // TODO implement
 }
 

@@ -7,8 +7,7 @@
 #include <map>
 #include <string>
 #include "block.hpp"
-
-const int TILE_SIZE = 32;
+#include "constants.hpp"
 
 class Level {
 
