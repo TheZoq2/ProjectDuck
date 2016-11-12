@@ -16,7 +16,7 @@ public:
 
     Level(std::string filename);
 
-    void draw(sf::Window& window);
+    void draw(sf::RenderWindow& window);
 
 private:
 
