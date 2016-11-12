@@ -6,6 +6,9 @@ void Duck::draw(sf::Window& window) const {
 
 std::vector<Block> Duck::get_blocks() const {
     // TODO implement
-    return std::vector<Block>();
+}
+
+sf::Vector2<double> Duck::wants_to_move() const {
+    // TODO implement
 }
 

@@ -16,13 +16,19 @@ public:
     virtual void draw(sf::Window& window) const = 0;
     virtual std::vector<Block> get_blocks() const = 0;
 
+    /*
+     * Gets the velocity vector of the direction and speed
+     * in which it wants to move.
+     */
+    virtual sf::Vector2<double> wants_to_move() const = 0;
+
     sf::Vector2<double> get_position() const;
     sf::Vector2<double> get_velocity() const;
-    void set_position(sf::Vector2<double>& position);
-    void set_velocity(sf::Vector2<double>& velocity);
+    void set_position(const sf::Vector2<double>& position);
+    void set_velocity(const sf::Vector2<double>& velocity);
     int get_mass() const;
 
-private:
+protected:
 
     sf::Vector2<double> position;
     sf::Vector2<double> velocity;
