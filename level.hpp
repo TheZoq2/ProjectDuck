@@ -12,6 +12,8 @@ class Level {
 
 public:
 
+    Level(std::string filename);
+
     void draw(sf::Window& window);
 
 private:

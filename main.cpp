@@ -10,7 +10,7 @@ int main() {
 
     sf::Window window(sf::VideoMode(800, 600), "Hello my friend! :)", sf::Style::Close);
 
-    Level level;
+    Level level("assets/level.json");
 
     while (window.isOpen())
     {
