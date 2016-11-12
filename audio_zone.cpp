@@ -10,14 +10,10 @@ AudioZone::AudioZone(sf::Vector2<double> position, sf::Vector2<double> size, boo
     this->duck = duck;
     this->crab = crab;
 
-    sound_buffer.loadFromFile(file);
-
-    sf::Sound sound;
-    sound.setBuffer(sound_buffer);
-    sound.play();
-    sound.setVolume(100);
-
-    std::cout << sound.getStatus() << std::endl;
+    if(!sound_buffer.loadFromFile(file))
+    {
+        std::cout << "Failed to load sound" << std::endl;
+    }
 }
 
 
@@ -37,7 +33,7 @@ void AudioZone::try_play(sf::Vector2<double> crab_pos, sf::Vector2<double> duck_
 void AudioZone::try_play_generic(sf::Vector2<double> pos) 
 {
     if(
-            !this->has_played &&
+            this->has_played == false &&
             pos.x > position.x &&
             pos.y > position.y &&
             pos.x < position.x + size.x &&
@@ -47,7 +43,6 @@ void AudioZone::try_play_generic(sf::Vector2<double> pos)
         std::cout << "playing sound" << std::endl;
         this->has_played = true;
 
-        sf::Sound sound;
         sound.setBuffer(sound_buffer);
         sound.play();
     }
