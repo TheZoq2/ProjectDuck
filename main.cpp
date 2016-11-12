@@ -39,7 +39,7 @@ viewRight.setViewport(sf::FloatRect(0, 0.5, 1, 0.5));
 
 
 		wave.draw(window);
-        // level.update();
+        level.update();
         level.draw(window);
 
 window.setView(viewLeft);
