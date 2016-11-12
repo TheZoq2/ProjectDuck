@@ -21,18 +21,34 @@ Level::Level(std::string filename)
     auto layer = level_json_data["layers"][0];
     auto layer_data = level_json_data["data"];
 
-    const int LEVEL_WIDTH = layer["width"];
-    const int LEVEL_HEIGHT = layer["height"];
-    const int TILE_WIDTH = 32;
+    width = layer["width"];
+    height = layer["height"];
+
+    grid.resize(width);
+
+    int tile_x = 0, tile_y = 0;
     for (int tile_index : layer_data) {
         sf::Sprite sprite;
         sprite.setTexture(texture);
-        sprite.setTextureRect(sf::IntRect(tile_index * TILE_WIDTH, 0, TILE_WIDTH, TILE_WIDTH));
+        sprite.setTextureRect(sf::IntRect(tile_index * TILE_SIZE, 0, TILE_SIZE, TILE_SIZE));
+        sprite.setPosition(sf::Vector2f(tile_x * TILE_SIZE, tile_y * TILE_SIZE));
 
-        // TODO: create block here and push it into the vector
+        Block block(sprite);
+        grid[tile_x].push_back(block);
+
+        tile_x++;
+        if (tile_x > width) {
+            tile_y++;
+            tile_x = 0;
+        }
     }
 }
 
 void Level::draw(sf::Window& window)
 {
+    for (int tile_x = 0; tile_x < width; tile_x++) {
+        for (int tile_y = 0; tile_y < height; tile_y++) {
+            grid[tile_x][tile_y].draw(window, sf::Vector2i(tile_x * TILE_SIZE, tile_y * TILE_SIZE));
+        }
+    }
 }

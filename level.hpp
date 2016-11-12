@@ -8,6 +8,8 @@
 #include <string>
 #include "block.hpp"
 
+const int TILE_SIZE = 32;
+
 class Level {
 
 public:
@@ -17,6 +19,8 @@ public:
     void draw(sf::Window& window);
 
 private:
+
+    int width, height;
 
     std::vector<std::vector<Block>> grid;
 
