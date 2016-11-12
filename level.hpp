@@ -30,11 +30,11 @@ private:
     void init_physics();
 
     cpSpace* space;
-    cpShape* ground;
-    cpBody* ball_body;
-    cpShape* ball_shape;
-    sf::Sprite ball_sprite;
+    sf::Sprite box_sprite1;
+    sf::Sprite box_sprite2;
     sf::Texture ball_texture;
+    cpBody* box_body1;
+    cpBody* box_body2;
 
     int width, height;
 
