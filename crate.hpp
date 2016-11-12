@@ -8,8 +8,13 @@ const static int CRATE_MASS = 2;
 class Crate : public Entity {
 public:
     
-    Crate(sf::Vector2<double>& position, sf::Vector2<double>& velocity) 
-        : Entity(position, velocity, CRATE_MASS) {}
+    Crate(sf::Vector2<double>& position);
+    virtual void draw(sf::RenderWindow& window) const override;
+    virtual std::vector<Block> get_blocks() const override;
+    virtual sf::Vector2<double> wants_to_move() const override;
+
+private:
+    sf::Sprite sprite;
     
 };
 
