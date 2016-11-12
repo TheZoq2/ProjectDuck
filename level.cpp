@@ -3,6 +3,8 @@
 #include <chipmunk/constraints/util.h>
 #include <fstream>
 #include <iostream>
+#include <cmath>
+#include <algorithm>    // std::max
 #include "entities/crab.hpp"
 #include "entities/duck.hpp"
 #include "entities/crate.hpp"
@@ -149,6 +151,29 @@ Level::Level(std::string filename)
             entities.push_back(new_entity);
         }
     }
+
+    //Loading audio zones
+    auto audio_layer = level_json_data["layers"][2];
+    auto audio_layer_data = audio_layer["objects"];
+
+    std::cout << audio_layer["name"] << std::endl;
+
+    for(auto zone : audio_layer_data)
+    {
+        int height = zone["height"];
+        int width = zone["width"];
+        int x = zone["x"];
+        int y = zone["y"];
+
+        auto properties = zone["properties"];
+        std::string filename = properties["audio_name"];
+        bool duck = true;
+        bool crab = true;
+
+        AudioZone result(sf::Vector2<double>(x, y), sf::Vector2<double>(width, height), duck, crab, "assets/" + filename);
+
+        this->audio_zones.push_back(result);
+    }
 }
 
 static void ShapeFreeWrap(cpSpace *space, cpShape *shape, void *unused){
@@ -200,6 +225,7 @@ Level::~Level() {
 
 void Level::draw(sf::RenderWindow& window)
 {
+    move_camera(window);
 
     for (int tile_x = 0; tile_x < width; tile_x++) {
         for (int tile_y = 0; tile_y < height; tile_y++) {
@@ -337,8 +363,17 @@ void Level::physics() {
     box_sprite2.setPosition(sf::Vector2f(pos.x, pos.y));
 }
 
-void Level::move_camera() {
+void Level::move_camera(sf::RenderWindow& window) {
+    int camera_center = ((duck->get_position().x - crab->get_position().x))/(2);
 
+    std::cout << camera_center;
+    sf::View camera_view(sf::FloatRect(0, 0, 800, 600));
+    // we keep our view centered on the player
+    camera_view.move(0,0);
+    window.setView(camera_view);
+    //mPos = sf::Mouse::getPosition(window);
+    //camera.move(mPos.x, mPox.y);
+    //window.setView(camera)
 }
 
 void Level::update() {
@@ -359,6 +394,9 @@ void Level::update() {
         }
     }
 
-    move_camera();
+    for(auto zone : audio_zones)
+    {
+        zone.try_play(crab->get_position(), duck->get_position());
+    }
 }
 

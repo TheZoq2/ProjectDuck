@@ -9,6 +9,8 @@
 #include <string>
 #include "block.hpp"
 #include "constants.hpp"
+#include "audio_zone.hpp"
+
 #include "entities/crab.hpp"
 #include "entities/duck.hpp"
 
@@ -38,8 +40,8 @@ private:
 
     int width, height;
 
-    Duck* duck;
-    Crab* crab;
+    Duck* duck = nullptr;
+    Crab* crab = nullptr;
 
     std::vector<std::vector<Block*>> grid;
 
@@ -51,9 +53,11 @@ private:
 
     std::map<std::string, sf::Texture> entity_textures;
 
+    std::vector<AudioZone> audio_zones;
+
     void physics();
 
-    void move_camera();
+    void move_camera(sf::RenderWindow& window);
 };
 
 #endif
