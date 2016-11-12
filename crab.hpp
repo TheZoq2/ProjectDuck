@@ -1,9 +1,9 @@
-#ifndef DUCK_H
-#define DUCK_H
+#ifndef CRAB_H
+#define CRAB_H
 
 #include "entity.hpp"
 
-class Duck : public Entity {
+class Crab : public Entity {
 
     public:
         virtual void draw(sf::Window& window) const override;
