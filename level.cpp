@@ -71,8 +71,10 @@ Level::Level(std::string filename)
             new_entity = new Lever(sprite, sf::Vector2<double>(x, y));
         } else if (type == "crab") {
             new_entity = new Crab(sf::Vector2<double>(x, y));
+            this->crab = (Crab*)new_entity;
         } else if (type == "duck") {
             new_entity = new Duck(sf::Vector2<double>(x, y));
+            this->duck = (Duck*)new_entity;
         } else if (type == "crate") {
             new_entity = new Crate(sf::Vector2<double>(x, y));
         } 
@@ -126,10 +128,27 @@ void Level::physics() {
 
 }
 
+void Level::move_camera() {
+
+}
+
 void Level::update() {
     // TODO collision detection
     for (Entity* entity : entities) {
         entity->set_position(entity->wants_to_move() + entity->get_position());
+        if (entity->can_interact_with(
+                    PlayerType::DUCK, duck->get_position())) {
+            entity->interact();
+            if (interaction_map.count(entity) == 1) {
+                // call the interact function of all the 
+                // things this entity interacts with
+                for (Entity* e : interaction_map[entity]) {
+                    e->interact();
+                }
+            }
+        }
     }
+
+    move_camera();
 }
 

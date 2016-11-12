@@ -8,7 +8,8 @@
 #include <string>
 #include "block.hpp"
 #include "constants.hpp"
-
+#include "entities/crab.hpp"
+#include "entities/duck.hpp"
 
 class Level {
 
@@ -27,6 +28,9 @@ private:
 
     int width, height;
 
+    Duck* duck;
+    Crab* crab;
+
     std::vector<std::vector<Block*>> grid;
 
     std::vector<Entity*> entities;
@@ -38,6 +42,8 @@ private:
     std::map<std::string, sf::Texture> entity_textures;
 
     void physics();
+
+    void move_camera();
 };
 
 #endif

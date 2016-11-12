@@ -2,6 +2,7 @@
 #define DUCK_H
 
 #include "entity.hpp"
+#include "constants.hpp"
 
 const static int DUCK_MASS = 5;
 

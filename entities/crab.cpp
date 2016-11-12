@@ -20,10 +20,10 @@ std::vector<sf::Vector2<int>> Crab::get_blocks() const {
 sf::Vector2<double> Crab::wants_to_move() const {
     sf::Vector2<double> velocity;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        velocity.x -= 1;
+        velocity.x -= DUCK_CRAB_SPEED;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        velocity.x += 1;
+        velocity.x += DUCK_CRAB_SPEED;
     }
     return velocity;
 }
