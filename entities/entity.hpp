@@ -11,10 +11,10 @@ class Entity {
 
 public:
 
-    Entity(sf::Vector2<double>& position, int mass);
+    Entity(sf::Vector2<double> position, int mass);
     virtual ~Entity() {}
 
-    virtual void draw(sf::RenderWindow& window) const = 0;
+    virtual void draw(sf::RenderWindow& window) = 0;
     virtual std::vector<sf::Vector2<int>> get_blocks() const = 0;
 
     /*

@@ -9,7 +9,7 @@ Lever::Lever(sf::Sprite sprite, sf::Vector2<double> position) :
     this->sprite.setPosition(sf::Vector2f(position.x, position.y));
 }
 
-void Lever::draw(sf::RenderWindow& window) const 
+void Lever::draw(sf::RenderWindow& window) 
 {
     window.draw(sprite);
 }

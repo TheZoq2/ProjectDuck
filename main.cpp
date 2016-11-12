@@ -9,12 +9,18 @@
 int main() {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 16;
-
+//	sf::Vector2i screenDimensions(800,400);
     sf::RenderWindow window(sf::VideoMode(800, 600), "Hello my friend! :)", sf::Style::Close, settings);
-sf::View viewLeft(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y/2));
-viewLeft.setViewport(sf::FloatRect(0, 0, 1, 0.5));
-sf::View viewRight(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y/2));
-viewRight.setViewport(sf::FloatRect(0, 0.5, 1, 0.5));
+
+	sf::Texture bTexture;
+	sf::Sprite bImage;
+
+	if(!bTexture.loadFromFile("assets/background.png")){
+		std::cout << "Could not load background image" << std::endl;
+	}
+
+	bImage.setTexture(bTexture);
+	bImage.setScale(1.0f, 600.0f/ bTexture.getSize().y);
 
 	Wave wave(800, 200, 100);
 
@@ -35,6 +41,7 @@ viewRight.setViewport(sf::FloatRect(0, 0.5, 1, 0.5));
 
 		window.clear(sf::Color::Blue);
 
+	    //window.draw(bImage);
 		wave.update();
 
 
@@ -42,10 +49,6 @@ viewRight.setViewport(sf::FloatRect(0, 0.5, 1, 0.5));
         level.update();
         level.draw(window);
 
-window.setView(viewLeft);
-//window.draw(leftSprite);
-window.setView(viewRight);
-//window.draw(rightSprite);
 		window.display();
     }
 

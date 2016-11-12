@@ -47,7 +47,7 @@ void Wave::update()
 void Wave::draw(sf::RenderWindow& window)
 {
 	sf::RenderStates render_states;
-	render_states.transform.translate(0, 400);;
+	render_states.transform.translate(0, 200);;
     render_states.shader = &shader;
 
 	window.draw(this->vertices, render_states);
