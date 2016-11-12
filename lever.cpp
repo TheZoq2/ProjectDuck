@@ -4,17 +4,17 @@ Lever::Lever(sf::Sprite sprite, sf::Vector2<double> position) :
     Entity(position, 0),
     sprite(sprite)
 {
-    
+    sprite.setPosition(sf::Vector2f(position.x, position.y));
 }
 
 void Lever::draw(sf::RenderWindow& window) const 
 {
-    //this->sprite.move(position.x, position.y);
+    window.draw(sprite);
 }
 
-std::vector<Block> Lever::get_blocks() const
+std::vector<sf::Vector2<int>> Lever::get_blocks() const
 {
-    return std::vector<Block>();
+    return std::vector<sf::Vector2<int>>();
 }
 
 sf::Vector2<double> Lever::wants_to_move() const
