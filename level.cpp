@@ -64,7 +64,11 @@ Level::Level(std::string filename)
         {
             sf::Sprite sprite(entity_textures["lever"]);
             new_entity = new Lever(sprite, sf::Vector2<double>(x, y));
-			std::cout << "adding lever" << std::endl;
+        }
+
+        if(new_entity != nullptr)
+        {
+            entities.push_back(new_entity);
         }
     }
 }
@@ -79,6 +83,7 @@ Level::~Level() {
 
 void Level::draw(sf::RenderWindow& window)
 {
+
     for (int tile_x = 0; tile_x < width; tile_x++) {
         for (int tile_y = 0; tile_y < height; tile_y++) {
             Block* block = grid[tile_x][tile_y];
@@ -86,6 +91,13 @@ void Level::draw(sf::RenderWindow& window)
                 block->draw(window, sf::Vector2i(tile_x * TILE_SIZE, tile_y * TILE_SIZE));
         }
     }
+
+    //Drawing entities
+    for(auto entity : entities)
+    {
+        entity->draw(window);
+    }
+
 }
 
 
