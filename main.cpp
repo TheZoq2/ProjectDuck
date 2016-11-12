@@ -1,14 +1,16 @@
 #include <iostream>
 #include <SFML/Window.hpp>
-#include "entity.h"
-#include "duck.h"
-#include "level.h"
+#include "entity.hpp"
+#include "duck.hpp"
+#include "level.hpp"
 
 int main() {
 
     std::cout << "Hello World!" << std::endl;
 
     sf::Window window(sf::VideoMode(800, 600), "Hello my friend! :)", sf::Style::Close);
+
+    Level level;
 
     while (window.isOpen())
     {
@@ -18,6 +20,8 @@ int main() {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+
+        level.draw(window);
     }
     return 0;
 }

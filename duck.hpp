@@ -1,11 +1,11 @@
 #ifndef DUCK_H
 #define DUCK_H
 
-#include "entity.h"
+#include "entity.hpp"
 
 class Duck : Entity {
 
-            
+
 
 };
 
