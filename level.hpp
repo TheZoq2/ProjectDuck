@@ -18,6 +18,8 @@ public:
 
     void draw(sf::RenderWindow& window);
 
+    void update();
+
 private:
 
     void load_entity_textures();

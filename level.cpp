@@ -82,3 +82,10 @@ void Level::load_entity_textures()
     lever_texture.loadFromFile("assets/lever.png");
     this->entity_textures["lever"] = lever_texture;
 }
+
+void Level::update() {
+    for (Entity* entity : entities) {
+        entity->set_position(entity->wants_to_move() + entity->get_position());
+    }
+}
+
