@@ -1,6 +1,6 @@
 #include "entity.hpp"
 
-Entity::Entity(sf::Vector2<double>& position, int mass) {
+Entity::Entity(sf::Vector2<double> position, int mass) {
     this->mass = mass;
     this->position = position;
 }

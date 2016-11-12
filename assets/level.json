@@ -20,12 +20,31 @@
                  "height":31,
                  "id":8,
                  "name":"",
+                 "properties":
+                    {
+
+                    },
                  "rotation":0,
                  "type":"lever",
                  "visible":true,
                  "width":31,
-                 "x":226,
-                 "y":324
+                 "x":161,
+                 "y":-1
+                }, 
+                {
+                 "height":0,
+                 "id":9,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"crab",
+                 "visible":true,
+                 "width":0,
+                 "x":278,
+                 "y":14
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -34,19 +53,26 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":9,
+ "nextobjectid":12,
  "orientation":"orthogonal",
+ "properties":
+    {
+
+    },
  "renderorder":"right-down",
  "tileheight":32,
  "tilesets":[
         {
-         "columns":3,
          "firstgid":1,
          "image":"tiles.png",
          "imageheight":32,
          "imagewidth":96,
          "margin":0,
          "name":"tiles",
+         "properties":
+            {
+
+            },
          "spacing":0,
          "tilecount":3,
          "tileheight":32,

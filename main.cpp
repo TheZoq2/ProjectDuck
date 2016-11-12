@@ -9,8 +9,8 @@
 int main() {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 16;
-	sf::Vector2i screenDimensions(800,400);
-    sf::RenderWindow window(screenDimensions, "Hello my friend! :)", sf::Style::Close, settings);
+//	sf::Vector2i screenDimensions(800,400);
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Hello my friend! :)", sf::Style::Close, settings);
 
 	/*sf::Texture bTexture;
 	sf::Sprite bImage;
@@ -27,7 +27,6 @@ int main() {
     Level level("assets/level.json");
 
     auto vec = sf::Vector2<double>(5, 5);
-
 
     while (window.isOpen())
     {
@@ -46,8 +45,8 @@ int main() {
 
 
 		wave.draw(window);
+        level.update();
         level.draw(window);
-
 
 		window.display();
     }
