@@ -75,5 +75,7 @@ void Level::draw(sf::RenderWindow& window)
 
 void Level::load_entity_textures()
 {
-    
+    sf::Texture lever_texture;
+    lever_texture.loadFromFile("assets/lever.png");
+    this->entity_textures["lever"] = lever_texture;
 }
