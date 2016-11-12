@@ -44,7 +44,7 @@ Level::Level(std::string filename)
     }
 }
 
-void Level::draw(sf::Window& window)
+void Level::draw(sf::RenderWindow& window)
 {
     for (int tile_x = 0; tile_x < width; tile_x++) {
         for (int tile_y = 0; tile_y < height; tile_y++) {

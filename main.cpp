@@ -6,6 +6,7 @@
 #include "entity.hpp"
 #include "duck.hpp"
 #include "level.hpp"
+#include "crab.hpp"
 
 int main() {
 	sf::ContextSettings settings;
@@ -16,6 +17,8 @@ int main() {
 	Wave wave(800, 200, 100);
 
     Level level("assets/level.json");
+
+    Crab crab;
 
     while (window.isOpen())
     {
