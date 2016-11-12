@@ -1,5 +1,7 @@
-const float iGlobalTime = 0.;
-const vec2 iResolution = vec2(1., 1.);
+uniform float iGlobalTime;
+const vec2 iResolution = vec2(800, 600);
+
+varying vec4 vertexPosition;
 
 float rayStrength(vec2 raySource, vec2 rayRefDirection, vec2 coord, float seedA, float seedB, float speed)
 {
@@ -24,8 +26,8 @@ float bubbleStrength(vec2 startPos, vec2 waveOffset, float radius, float speed, 
 void main()
 {
 	vec2 uv = gl_FragCoord.xy / iResolution.xy;
-	uv.y = 1.0 - uv.y;
 	vec2 coord = vec2(gl_FragCoord.x, iResolution.y - gl_FragCoord.y);
+    //vec2 coord = vertexPosition.xy;
 	
 	// Calculate the lookup transformation offset for the current fragment
 	float offsetX = (0.1112 * iResolution.x * cos(1.44125 * (iGlobalTime + uv.y))) + (26.77311 * iGlobalTime);
@@ -113,17 +115,20 @@ void main()
 		bubble6 * 0.05 +
 		bubble7 * 0.12 +
 		bubble8 * 0.11;
+    //gl_FragColor = vec4(coord.x, coord.y, 0., iGlobalTime);
 	
-    gl_FragColor = vec4(gl_FragColor.xyz, 0.5);
+    gl_FragColor = vec4(gl_FragColor.xyz, 0.4);
 	// Uncomment this line if you want to see just the rays:
 	//gl_FragColor = rays1 * 0.5 + rays2 * 0.5;
 	
 	// Attenuate brightness towards the bottom, simulating light-loss due to depth.
 	// Give the whole thing a blue-green tinge as well.
-	//float brightness = 1.0 - (coord.y / iResolution.y);
+	//float brightness = 1.0 - (coord.y);
 	//gl_FragColor.x *= 0.2 + (brightness * 0.8);
 	//gl_FragColor.y *= 0.3 + (brightness * 0.7);
 	//gl_FragColor.z *= 0.4 + (brightness * 0.6);
+
+    //gl_FragColor.x = coord.y;
 }
 
 

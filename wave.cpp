@@ -46,6 +46,8 @@ void Wave::update()
 
 void Wave::draw(sf::RenderWindow& window)
 {
+    shader.setParameter("iGlobalTime", internal_time);
+
 	sf::RenderStates render_states;
 	render_states.transform.translate(0, 200);;
     render_states.shader = &shader;
