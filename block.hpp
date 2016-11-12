@@ -6,7 +6,7 @@
 class Block {
 public:
     Block(sf::Sprite sprite);
-    void draw(sf::Window& window, sf::Vector2<int> position);
+    void draw(sf::RenderWindow& window, sf::Vector2<int> position);
 private:
     sf::Sprite sprite;
 };
