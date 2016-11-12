@@ -9,7 +9,7 @@ AudioZone::AudioZone(sf::Vector2<double> position, sf::Vector2<double> size, boo
     this->duck = duck;
     this->crab = crab;
 
-    //sound_buffer.loadFromFile(file);
+    sound_buffer.loadFromFile(file);
 }
 
 
