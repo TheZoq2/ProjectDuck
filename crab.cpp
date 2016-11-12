@@ -1,7 +1,16 @@
 #include "crab.hpp"
 
+Crab::Crab(sf::Vector2<double>& position, sf::Vector2<double>& velocity)
+    : Entity(position, velocity, CRAB_MASS)
+{
+    sf::Texture texture;
+    texture.create(32, 32);
+
+    sprite.setTexture(texture);
+}
+
 void Crab::draw(sf::RenderWindow& window) const {
-    // TODO implement
+    window.draw(sprite);
 }
 
 std::vector<Block> Crab::get_blocks() const {
