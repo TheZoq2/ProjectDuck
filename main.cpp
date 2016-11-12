@@ -2,6 +2,8 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <ctime>
+#include <chrono>
+#include <thread>
 
 #include "wave.h"
 #include "entities/entity.hpp"
@@ -33,7 +35,8 @@ int main() {
 	{
 		sf::Event event;
 
-		clock_t timer_start = clock();
+		std::chrono::time_point<std::chrono::system_clock> start, end;
+		start = std::chrono::system_clock::now();
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
@@ -50,9 +53,13 @@ int main() {
 		level.draw(window);
 
 		window.display();
-		clock_t timer_end = clock();
+		end = std::chrono::system_clock::now();
 
-		std::cout << (float)(timer_end - timer_start)/(CLOCKS_PER_SEC/1000) << std::endl;
+		std::chrono::duration<double> elapsed_seconds = end-start;
+
+		std::cout << elapsed_seconds.count() << std::endl;
+		std::this_thread::sleep_for(std::chrono::milliseconds(16 - (int)elapsed_seconds.count())); 
+
 	}
 
 	return 0;
