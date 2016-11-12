@@ -1,6 +1,6 @@
 #include "crab.hpp"
 
-void Crab::draw(sf::Window& window) const {
+void Crab::draw(sf::RenderWindow& window) const {
     // TODO implement
 }
 

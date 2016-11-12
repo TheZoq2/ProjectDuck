@@ -1,6 +1,6 @@
 #include "duck.hpp"
 
-void Duck::draw(sf::Window& window) const {
+void Duck::draw(sf::RenderWindow& window) const {
     // TODO implement
 }
 

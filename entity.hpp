@@ -11,7 +11,7 @@ public:
 
     Entity(sf::Vector2<double>& position,
             sf::Vector2<double>& velocity, int mass);
-    ~Entity();
+    virtual ~Entity() {}
 
     virtual void draw(sf::Window& window) const = 0;
     virtual std::vector<Block> get_blocks() const = 0;

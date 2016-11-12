@@ -4,7 +4,6 @@ Entity::Entity(sf::Vector2<double>& position,
             sf::Vector2<double>& velocity, int mass) {
     this->mass = mass;
     this->position = position;
-    this->velocity = velocity;
 }
 
 sf::Vector2<double> Entity::get_position() const {
