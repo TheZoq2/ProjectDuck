@@ -56,7 +56,6 @@ int main() {
 
 		end = std::chrono::system_clock::now();
 		std::chrono::duration<double> elapsed_seconds = end-start;
-		std::cout << elapsed_seconds.count() << std::endl;
 		std::this_thread::sleep_for(std::chrono::milliseconds(16 - (int)elapsed_seconds.count())); 
 	}
 
