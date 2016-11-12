@@ -8,9 +8,8 @@ const static int DUCK_MASS = 5;
 class Duck : public Entity {
 
 public:
-    
-    Duck(sf::Vector2<double>& position) 
-        : Entity(position, DUCK_MASS) {}
+
+    Duck(sf::Vector2<double>& position);
 
     virtual void draw(sf::RenderWindow& window) const override;
     virtual std::vector<sf::Vector2<int>> get_blocks() const override;
