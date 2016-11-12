@@ -2,6 +2,7 @@
 #define LEVEL_H
 
 #include <SFML/Graphics.hpp>
+#include <chipmunk/chipmunk.h>
 #include <vector>
 #include "entities/entity.hpp"
 #include <map>
@@ -24,6 +25,15 @@ public:
 private:
 
     void load_entity_textures();
+
+    void init_physics();
+
+    cpSpace* space;
+    cpShape* ground;
+    cpBody* ball_body;
+    cpShape* ball_shape;
+    sf::Sprite ball_sprite;
+    sf::Texture ball_texture;
 
     int width, height;
 

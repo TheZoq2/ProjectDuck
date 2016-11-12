@@ -50,8 +50,10 @@ Level::Level(std::string filename)
             tile_x = 0;
         }
     }
-    
-    
+
+    init_physics();
+
+
     //Loading entities
     auto entity_layer = level_json_data["layers"][1];
     auto entity_layer_data = entity_layer["objects"];
@@ -75,7 +77,7 @@ Level::Level(std::string filename)
             new_entity = new Duck(sf::Vector2<double>(x, y));
         } else if (type == "crate") {
             new_entity = new Crate(sf::Vector2<double>(x, y));
-        } 
+        }
 
         if (new_entity != nullptr)
         {
@@ -90,6 +92,11 @@ Level::~Level() {
             delete block;
         }
     }
+
+    cpShapeFree(ball_shape);
+    cpBodyFree(ball_body);
+    cpShapeFree(ground);
+    cpSpaceFree(space);
 }
 
 void Level::draw(sf::RenderWindow& window)
@@ -109,6 +116,7 @@ void Level::draw(sf::RenderWindow& window)
         entity->draw(window);
     }
 
+    window.draw(ball_sprite);
 }
 
 
@@ -122,11 +130,39 @@ void Level::load_entity_textures()
     this->entity_textures["lever"] = lever_texture;
 }
 
-void Level::physics() {
+void Level::init_physics() {
+    // Create physics stuff
+    space = cpSpaceNew();
+    cpSpaceSetGravity(space, cpv(0, 100));
 
+    ground = cpSegmentShapeNew(space->staticBody, cpv(-20, 50), cpv(20, 100), 0);
+    cpShapeSetFriction(ground, 1);
+    cpSpaceAddShape(space, ground);
+
+    float mass = 1;
+    float radius = 5;
+    float moment = cpMomentForCircle(mass, 0, radius, cpvzero);
+
+    ball_body = cpSpaceAddBody(space, cpBodyNew(mass, moment));
+    cpBodySetPos(ball_body, cpv(0, 15));
+
+    ball_shape = cpSpaceAddShape(space, cpCircleShapeNew(ball_body, radius, cpvzero));
+    cpShapeSetFriction(ball_shape, 0.7);
+
+    ball_texture.loadFromFile("assets/crab.png");
+    ball_sprite.setTexture(ball_texture);
+}
+
+void Level::physics() {
+    float time_step = 1.0f / 60.0f;
+    cpSpaceStep(space, time_step);
+    cpVect pos = cpBodyGetPos(ball_body);
+    ball_sprite.setRotation(cpBodyGetAngle(ball_body));
+    ball_sprite.setPosition(sf::Vector2f(pos.x, pos.y));
 }
 
 void Level::update() {
+    physics();
     // TODO collision detection
     for (Entity* entity : entities) {
         entity->set_position(entity->wants_to_move() + entity->get_position());
