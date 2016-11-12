@@ -3,10 +3,9 @@
 Crab::Crab(sf::Vector2<double>& position)
     : Entity(position, CRAB_MASS)
 {
-    sf::Texture texture;
     texture.create(32, 32);
-
     sprite.setTexture(texture);
+    //sprite.setColor(sf::Color(255, 255, 255));
 }
 
 void Crab::draw(sf::RenderWindow& window) const {

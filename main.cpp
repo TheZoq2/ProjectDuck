@@ -20,6 +20,9 @@ viewRight.setViewport(sf::FloatRect(0, 0.5, 1, 0.5));
 
     Level level("assets/level.json");
 
+    auto vec = sf::Vector2<double>(5, 5);
+    Crab crab(vec);
+
 
     while (window.isOpen())
     {
@@ -39,6 +42,9 @@ viewRight.setViewport(sf::FloatRect(0, 0.5, 1, 0.5));
 
 		wave.draw(window);
         level.draw(window);
+
+        crab.draw(window);
+
 window.setView(viewLeft);
 //window.draw(leftSprite);
 window.setView(viewRight);
