@@ -389,10 +389,6 @@ void Level::physics() {
 void Level::move_camera(sf::RenderWindow& window) {
     int camera_center = ((duck->get_position().x - crab->get_position().x))/(2);
 
-<<<<<<< HEAD
-   // std::cout << camera_center;
-=======
->>>>>>> 8575cf2a6756741b5ff5feb493eabc42ca51e618
     sf::View camera_view(sf::FloatRect(0, 0, 800, 600));
     // we keep our view centered on the player //as 400 is the half of the scrensize
     camera_view.setCenter(duck->get_position().x - camera_center,300);
