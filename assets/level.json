@@ -24,8 +24,8 @@
                  "type":"lever",
                  "visible":true,
                  "width":31,
-                 "x":161,
-                 "y":-1
+                 "x":561,
+                 "y":51
                 }, 
                 {
                  "height":31,
@@ -48,6 +48,17 @@
                  "width":31,
                  "x":688,
                  "y":50.5
+                }, 
+                {
+                 "height":160,
+                 "id":15,
+                 "name":"wall1",
+                 "rotation":0,
+                 "type":"wall",
+                 "visible":true,
+                 "width":53,
+                 "x":796.5,
+                 "y":34.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -91,7 +102,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":14,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,
