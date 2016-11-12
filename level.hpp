@@ -2,12 +2,15 @@
 #define LEVEL_H
 
 #include <SFML/Graphics.hpp>
+#include <chipmunk/chipmunk.h>
 #include <vector>
 #include "entities/entity.hpp"
 #include <map>
 #include <string>
 #include "block.hpp"
 #include "constants.hpp"
+#include "audio_zone.hpp"
+
 #include "entities/crab.hpp"
 #include "entities/duck.hpp"
 
@@ -26,6 +29,15 @@ private:
 
     void load_entity_textures();
 
+    void init_physics();
+
+    cpSpace* space;
+    cpShape* ground;
+    cpBody* ball_body;
+    cpShape* ball_shape;
+    sf::Sprite ball_sprite;
+    sf::Texture ball_texture;
+
     int width, height;
 
     Duck* duck;
@@ -40,6 +52,8 @@ private:
     sf::Texture tile_texture;
 
     std::map<std::string, sf::Texture> entity_textures;
+
+    std::vector<AudioZone> audio_zones;
 
     void physics();
 
