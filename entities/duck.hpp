@@ -15,6 +15,10 @@ public:
     virtual std::vector<sf::Vector2<int>> get_blocks() const override;
     virtual sf::Vector2<double> wants_to_move() const override;
 
+private:
+    sf::Sprite sprite;
+    sf::Texture texture;
+
 };
 
 #endif
