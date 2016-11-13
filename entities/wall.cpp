@@ -1,4 +1,5 @@
 #include "wall.hpp"
+#include <iostream>
 
 Wall::Wall(sf::Vector2<double> position, int height,
         int width, std::string name)
@@ -30,5 +31,6 @@ std::vector<sf::Vector2<int>> Wall::get_blocks() const
 
 void Wall::interact() {
     moved = true;
+    std::cout << "Moving " << name << "..." << std::endl;
 }
 
