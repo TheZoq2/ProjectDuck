@@ -10,12 +10,11 @@ class Wall : public Entity {
 
 public:
 
-    Wall(sf::Vector2<double> position, int height, int width);
+    Wall(sf::Vector2<float> position, int height, int width);
 
     virtual void draw(sf::RenderWindow& window) override;
     virtual std::vector<sf::Vector2<int>> get_blocks() const override;
-    
-    virtual sf::Vector2<double> wants_to_move() const override;
+
     virtual void interact() override;
 
 private:

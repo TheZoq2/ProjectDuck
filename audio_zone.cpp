@@ -1,7 +1,7 @@
 #include "audio_zone.hpp"
 #include <iostream>
 
-AudioZone::AudioZone(sf::Vector2<double> position, sf::Vector2<double> size, bool duck, bool crab, std::string file)
+AudioZone::AudioZone(sf::Vector2<float> position, sf::Vector2<float> size, bool duck, bool crab, std::string file)
 {
     this->position = position;
     this->size = size;
@@ -17,7 +17,7 @@ AudioZone::AudioZone(sf::Vector2<double> position, sf::Vector2<double> size, boo
 }
 
 
-void AudioZone::try_play(sf::Vector2<double> crab_pos, sf::Vector2<double> duck_pos) 
+void AudioZone::try_play(sf::Vector2<float> crab_pos, sf::Vector2<float> duck_pos) 
 {
     if(duck)
     {
@@ -30,7 +30,7 @@ void AudioZone::try_play(sf::Vector2<double> crab_pos, sf::Vector2<double> duck_
 }
 
 
-void AudioZone::try_play_generic(sf::Vector2<double> pos) 
+void AudioZone::try_play_generic(sf::Vector2<float> pos) 
 {
     if(
             this->has_played == false &&

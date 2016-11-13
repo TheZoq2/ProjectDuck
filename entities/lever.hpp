@@ -3,7 +3,7 @@
 
 #include "entity.hpp"
 
-const double INTERACT_DISTANCE = 20.0;
+const float INTERACT_DISTANCE = 20.0;
 
 enum LeverState 
 { 
@@ -14,16 +14,15 @@ enum LeverState
 class Lever: public Entity
 {
     public:
-        Lever(sf::Vector2<double> position);
+        Lever(sf::Vector2<float> position);
 
         void draw(sf::RenderWindow& window) override;
         std::vector<sf::Vector2<int>> get_blocks() const override;
-        sf::Vector2<double> wants_to_move() const override;
         virtual void interact() override;
 
         virtual bool
             can_interact_with(PlayerType type,
-                    sf::Vector2<double> position) override;
+                    sf::Vector2<float> position) override;
     
     private:
         sf::Texture main_texture;
