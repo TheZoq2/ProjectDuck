@@ -13,7 +13,7 @@ class Entity {
 
 public:
 
-    Entity(sf::Vector2<double> position, int mass, std::string name);
+    Entity(sf::Vector2<float> position, float mass, std::string name);
     virtual ~Entity() {}
 
     virtual void draw(sf::RenderWindow& window) = 0;
@@ -23,23 +23,24 @@ public:
      * Gets the velocity vector of the direction and speed
      * in which it wants to move.
      */
-    virtual sf::Vector2<double> wants_to_move() const = 0;
+    virtual void move() {}
     virtual void interact();
 
-    virtual bool 
-        can_interact_with(PlayerType type, sf::Vector2<double> position);
+    virtual bool
+        can_interact_with(PlayerType type, sf::Vector2<float> position);
 
-    sf::Vector2<double> get_position() const;
-    virtual void set_position(const sf::Vector2<double>& position);
+    sf::Vector2<float> get_position() const;
+    virtual void set_position(const sf::Vector2<float>& position);
     int get_mass() const;
     std::string get_name() const;
 
 protected:
 
-    sf::Vector2<double> position;
-    int mass;
     std::string name;
     
+    sf::Vector2<float> position;
+    float mass;
+
     virtual void body_init(int width, int height, cpSpace* space);
 
     cpBody* body;

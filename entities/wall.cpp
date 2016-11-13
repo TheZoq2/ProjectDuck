@@ -1,7 +1,7 @@
 #include "wall.hpp"
 #include <iostream>
 
-Wall::Wall(sf::Vector2<double> position, int height,
+Wall::Wall(sf::Vector2<float> position, int height,
         int width, std::string name)
     : Entity(position, WALL_MASS, name) {
     texture.setRepeated(true);
@@ -17,11 +17,6 @@ Wall::Wall(sf::Vector2<double> position, int height,
 
 void Wall::draw(sf::RenderWindow& window) {
     window.draw(sprite);
-}
-
-sf::Vector2<double> Wall::wants_to_move() const {
-    if (!moved) return sf::Vector2<double>(0,0);
-    return sf::Vector2<double>(0, -10);
 }
 
 std::vector<sf::Vector2<int>> Wall::get_blocks() const
