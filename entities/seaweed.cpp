@@ -1,12 +1,20 @@
 #include "seaweed.hpp"
+#include "../vectorutils.hpp"
 
-SeaWeed::SeaWeed(sf::Vector2f position, std::string name) :
+#include <chipmunk/chipmunk.h>
+
+SeaWeed::SeaWeed(sf::Vector2f position, sf::Vector2f size, std::string name, cpSpace* space) :
     Entity(position, 0, name)
 {
     std::string filename = "assets/seaweed.png";
     texture.loadFromFile(filename);
     sprite.setTexture(texture);
     sprite.setPosition(position);
+    
+    this->body = cpBodyNewStatic();
+    cpBodySetPos(body, graphics_to_physics(sf::Vector2f(position.x, position.y)));
+    cpShape* shape = cpSpaceAddShape(space,
+            cpBoxShapeNew(body, size.x, size.y));
 }
 
 void SeaWeed::draw(sf::RenderWindow& window) 

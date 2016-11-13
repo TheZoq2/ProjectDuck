@@ -7,7 +7,7 @@ class SeaWeed : public Entity
 {
 public:
 
-    SeaWeed(sf::Vector2<float> position, std::string name);
+    SeaWeed(sf::Vector2<float> position, sf::Vector2f size, std::string name, cpSpace* space);
 
     virtual void draw(sf::RenderWindow& window) override;
 

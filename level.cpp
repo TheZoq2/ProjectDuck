@@ -99,7 +99,7 @@ Level::Level(std::string filename)
             new_entity = new Wall(pos, entity["height"],
                      entity["width"], name);
         } else if (type == "seaweed"){
-            new_entity = new SeaWeed(pos, name);
+            new_entity = new SeaWeed(pos, sf::Vector2f(entity["width"], entity["height"]), name, space);
         }
 
         if (new_entity != nullptr)
