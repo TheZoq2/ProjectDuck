@@ -5,6 +5,12 @@
 
 const double INTERACT_DISTANCE = 20.0;
 
+enum LeverState 
+{ 
+    ON,
+    OFF,
+};
+
 class Lever: public Entity
 {
     public:
@@ -26,7 +32,8 @@ class Lever: public Entity
         sf::Sprite pulled_sprite;
 
         sf::Sprite* current_sprite;
-        
+
+        LeverState state;
 };
 
 #endif

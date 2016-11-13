@@ -14,6 +14,8 @@ Lever::Lever(sf::Vector2<double> position) :
     this->main_sprite.setPosition(sf::Vector2f(position.x, position.y));
     this->pulled_sprite.setPosition(sf::Vector2f(position.x, position.y));
     this->current_sprite = &main_sprite;
+
+	state = OFF;
 }
 
 void Lever::draw(sf::RenderWindow& window) 
@@ -32,7 +34,16 @@ sf::Vector2<double> Lever::wants_to_move() const
 }
 
 void Lever::interact() {
-    this->current_sprite = &pulled_sprite;
+	if(state == ON)
+	{
+		state = OFF;
+    	this->current_sprite = &main_sprite;
+	}
+	else
+	{
+		state = ON;
+		this->current_sprite = &pulled_sprite;
+	}
 }
 
 bool Lever::can_interact_with(PlayerType type, sf::Vector2<double> position) {
