@@ -20,12 +20,20 @@
                  "height":31,
                  "id":8,
                  "name":"",
+                 "properties":
+                    {
+                     "links":"wall1"
+                    },
+                 "propertytypes":
+                    {
+                     "links":"string"
+                    },
                  "rotation":0,
                  "type":"lever",
                  "visible":true,
                  "width":31,
-                 "x":561,
-                 "y":51
+                 "x":301,
+                 "y":142
                 }, 
                 {
                  "height":31,
@@ -35,8 +43,8 @@
                  "type":"crab",
                  "visible":true,
                  "width":31,
-                 "x":747,
-                 "y":54.5
+                 "x":586,
+                 "y":135.5
                 }, 
                 {
                  "height":31,
@@ -46,8 +54,8 @@
                  "type":"duck",
                  "visible":true,
                  "width":31,
-                 "x":688,
-                 "y":50.5
+                 "x":709,
+                 "y":133.5
                 }, 
                 {
                  "height":160,
@@ -57,8 +65,8 @@
                  "type":"wall",
                  "visible":true,
                  "width":53,
-                 "x":796.5,
-                 "y":34.5
+                 "x":191.5,
+                 "y":56.5
                 }],
          "opacity":1,
          "type":"objectgroup",
