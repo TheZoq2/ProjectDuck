@@ -1,7 +1,8 @@
 #include "wall.hpp"
 
-Wall::Wall(sf::Vector2<double> position, int height, int width)
-    : Entity(position, WALL_MASS) {
+Wall::Wall(sf::Vector2<double> position, int height,
+        int width, std::string name)
+    : Entity(position, WALL_MASS, name) {
     texture.setRepeated(true);
     texture.loadFromFile("assets/wall.png");
     sprite.setTexture(texture);

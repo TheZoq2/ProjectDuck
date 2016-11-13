@@ -45,7 +45,7 @@ private:
 
     std::vector<Entity*> entities;
 
-    std::map<Entity*, std::vector<Entity*>> interaction_map;
+    std::map<std::string, std::vector<Entity*>> interaction_map;
 
     sf::Texture tile_texture;
 
@@ -54,6 +54,8 @@ private:
     void physics();
 
     void move_camera(sf::RenderWindow& window);
+
+    Entity* find_entity(std::string name);
 };
 
 #endif

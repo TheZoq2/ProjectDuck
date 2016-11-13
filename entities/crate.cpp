@@ -1,6 +1,7 @@
 #include "crate.hpp"
 
-Crate::Crate(sf::Vector2<double> position) : Entity(position, CRATE_MASS) {
+Crate::Crate(sf::Vector2<double> position, std::string name) 
+: Entity(position, CRATE_MASS, name) {
     sf::Texture texture;
     texture.create(32, 32);
 

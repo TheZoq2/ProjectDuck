@@ -14,7 +14,7 @@ enum LeverState
 class Lever: public Entity
 {
     public:
-        Lever(sf::Vector2<double> position);
+        Lever(sf::Vector2<double> position, std::string name);
 
         void draw(sf::RenderWindow& window) override;
         std::vector<sf::Vector2<int>> get_blocks() const override;

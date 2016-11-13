@@ -10,7 +10,7 @@ class Crab : public Entity {
 
 public:
 
-    Crab(sf::Vector2<double> position);
+    Crab(sf::Vector2<double> position, std::string name);
 
     virtual void draw(sf::RenderWindow& window) override;
     virtual std::vector<sf::Vector2<int>> get_blocks() const override;

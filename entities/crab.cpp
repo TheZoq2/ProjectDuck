@@ -1,7 +1,7 @@
 #include "crab.hpp"
 
-Crab::Crab(sf::Vector2<double> position)
-    : Entity(position, CRAB_MASS)
+Crab::Crab(sf::Vector2<double> position, std::string name)
+    : Entity(position, CRAB_MASS, name)
 {
     texture.loadFromFile("assets/crab.png");
     sprite.setTexture(texture);
