@@ -18,7 +18,6 @@ class Lever: public Entity
 
         void draw(sf::RenderWindow& window) override;
         std::vector<sf::Vector2<int>> get_blocks() const override;
-        sf::Vector2<double> wants_to_move() const override;
         virtual void interact() override;
 
         virtual bool

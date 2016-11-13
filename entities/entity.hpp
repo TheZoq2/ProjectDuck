@@ -22,10 +22,10 @@ public:
      * Gets the velocity vector of the direction and speed
      * in which it wants to move.
      */
-    virtual sf::Vector2<double> wants_to_move() const = 0;
+    virtual void move() {}
     virtual void interact();
 
-    virtual bool 
+    virtual bool
         can_interact_with(PlayerType type, sf::Vector2<double> position);
 
     sf::Vector2<double> get_position() const;
@@ -36,7 +36,7 @@ protected:
 
     sf::Vector2<double> position;
     int mass;
-    
+
     virtual void body_init(int width, int height, cpSpace* space);
 
     cpBody* body;

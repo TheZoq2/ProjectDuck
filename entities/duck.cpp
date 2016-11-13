@@ -20,18 +20,20 @@ std::vector<sf::Vector2<int>> Duck::get_blocks() const {
 }
 
 sf::Vector2<double> Duck::wants_to_move() const {
-    sf::Vector2<double> velocity;
+    cpVec velocity;
+    cpVec.y = cpBodyGetVel(body).y;
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)) {
         velocity.x -= DUCK_CRAB_SPEED;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
         velocity.x += DUCK_CRAB_SPEED;
     }
-    return velocity;
+	cpBodySetVel(body, cpVec);
 }
 
 void Duck::set_position(const sf::Vector2<double>& position) {
     this->position = position;
-    cpBodySetPos(body, cpv(position.x, position.y));
+    cpBodySetPos(body, graphics_to_physics(position));
 }
 

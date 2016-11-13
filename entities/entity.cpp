@@ -6,7 +6,7 @@ Entity::Entity(sf::Vector2<double> position, int mass) {
     this->body = nullptr;
 }
 
-bool Entity::can_interact_with(PlayerType type, 
+bool Entity::can_interact_with(PlayerType type,
         sf::Vector2<double> position) {
     return false;
 }
@@ -31,7 +31,7 @@ int Entity::get_mass() const {
 void Entity::body_init(int width, int height, cpSpace* space) {
     this->body = cpSpaceAddBody(space,
             cpBodyNew(mass, cpMomentForBox(mass, width, height)));
-    cpBodySetPos(body, cpv(position.x, position.y));
+    cpBodySetPos(body, graphics_to_physics(position));
     cpShape* shape = cpSpaceAddShape(space,
             cpBoxShapeNew(body, width, height));
 }

@@ -14,7 +14,7 @@ public:
 
     virtual void draw(sf::RenderWindow& window) override;
     virtual std::vector<sf::Vector2<int>> get_blocks() const override;
-    virtual sf::Vector2<double> wants_to_move() const override;
+    virtual void move() override;
     virtual void set_position(const sf::Vector2<double>& position) override;
 
 private:

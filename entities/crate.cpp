@@ -19,8 +19,3 @@ std::vector<sf::Vector2<int>> Crate::get_blocks() const {
     return blocks;
 }
 
-sf::Vector2<double> Crate::wants_to_move() const {
-    // shouldn't move by itself
-    return sf::Vector2<double>(0, 0);
-}
-

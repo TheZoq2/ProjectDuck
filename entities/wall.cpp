@@ -17,9 +17,10 @@ void Wall::draw(sf::RenderWindow& window) {
     window.draw(sprite);
 }
 
-sf::Vector2<double> Wall::wants_to_move() const {
-    if (!moved) return sf::Vector2<double>(0,0);
-    return sf::Vector2<double>(0, -10);
+void Wall::wants_to_move() {
+	cpBodySetVel(body, cpv(0, 0));
+    if (moved)
+        cpBodySetVel(body, cpv(0, 10));
 }
 
 std::vector<sf::Vector2<int>> Wall::get_blocks() const

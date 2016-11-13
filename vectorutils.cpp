@@ -21,3 +21,13 @@ double distance(sf::Vector2<double> v1, sf::Vector2<double> v2) {
     return compute_distance(v1.x, v2.x, v1.y, v2.y);
 }
 
+sf::Vector2f physics_to_graphics(cpVect vec) {
+    return sf::Vector2f(vec.x, 600-vec.y);
+}
+
+cpVect graphics_to_physics(sf::Vector2f vec) {
+    cpVect newVec;
+    newVec.x = vec.x;
+    newVec.y = vec.y;
+    return newVec;
+}

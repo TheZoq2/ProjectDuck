@@ -10,6 +10,7 @@
 #include "entities/crate.hpp"
 #include "entities/lever.hpp"
 #include "entities/wall.hpp"
+#include "vectorutils.hpp"
 
 using namespace std;
 // For JSON parsing
@@ -225,10 +226,6 @@ Level::~Level() {
     cpSpaceFree(space);
 }
 
-sf::Vector2f physics_to_graphics(cpVect vec) {
-    return sf::Vector2f(vec.x, 600-vec.y);
-}
-
 void Level::draw(sf::RenderWindow& window)
 {
     move_camera(window);
@@ -247,13 +244,13 @@ void Level::draw(sf::RenderWindow& window)
         entity->draw(window);
     }
 
-    sf::Vertex line[] = {
-        sf::Vertex(sf::Vector2f(400, 200)),
-        sf::Vertex(sf::Vector2f(400, 600)),
-        sf::Vertex(sf::Vector2f(1200, 600)),
-        sf::Vertex(sf::Vector2f(1200, 200))
-    };
-    window.draw(line, 4, sf::Lines);
+    // sf::Vertex line[] = {
+    //     sf::Vertex(sf::Vector2f(400, 200)),
+    //     sf::Vertex(sf::Vector2f(400, 600)),
+    //     sf::Vertex(sf::Vector2f(1200, 600)),
+    //     sf::Vertex(sf::Vector2f(1200, 200))
+    // };
+    // window.draw(line, 4, sf::Lines);
 
     sf::RectangleShape rectangle1(sf::Vector2f(200, 50));
     sf::RectangleShape rectangle2(sf::Vector2f(40, 80));
@@ -382,7 +379,7 @@ void Level::move_camera(sf::RenderWindow& window) {
     sf::View camera_view(sf::FloatRect(0, 0, 800, 600));
     // we keep our view centered on the player //as 400 is the half of the scrensize
     camera_view.setCenter(duck->get_position().x - camera_center,300);
-    
+
     if ((duck->get_position().x - camera_center) > (window.getView().getCenter().x + 200)) {
         camera_view.setCenter(duck->get_position().x - camera_center - 200,300);
         window.setView(camera_view);
@@ -398,7 +395,8 @@ void Level::update() {
     physics();
     // TODO collision detection
     for (Entity* entity : entities) {
-        entity->set_position(entity->wants_to_move() + entity->get_position());
+        entity->move();
+
         if (entity->can_interact_with(
                     PlayerType::DUCK, duck->get_position())) {
             entity->interact();

@@ -16,13 +16,15 @@ std::vector<sf::Vector2<int>> Crab::get_blocks() const {
     return std::vector<sf::Vector2<int>>();
 }
 
-sf::Vector2<double> Crab::wants_to_move() const {
-    sf::Vector2<double> velocity;
+void Crab::move() {
+    cpVec velocity;
+    cpVec.y = cpBodyGetVel(body).y;
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         velocity.x -= DUCK_CRAB_SPEED;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         velocity.x += DUCK_CRAB_SPEED;
     }
-    return velocity;
+	cpBodySetVel(body, cpVec);
 }
