@@ -27,7 +27,7 @@ PressurePlate::PressurePlate(sf::Vector2<float> position,
             (cpCollisionPreSolveFunc)handle_pressure, NULL, nullptr, this);
 
     main_texture.loadFromFile("assets/pressure_plate.png");
-    pushed_texture.loadFromFile("assets/pressure_plate_pushed.png");
+    pushed_texture.loadFromFile("assets/pressure_plate_pressed.png");
     main_sprite.setTexture(main_texture);
     pushed_sprite.setTexture(pushed_texture);
 
