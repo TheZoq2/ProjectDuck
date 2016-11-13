@@ -26,6 +26,12 @@
                      "comment":"duck cannot go further",
                      "links":"wall_c_1"
                     },
+                 "propertytypes":
+                    {
+                     "attribute":"string",
+                     "comment":"string",
+                     "links":"string"
+                    },
                  "rotation":0,
                  "type":"lever",
                  "visible":true,
@@ -37,10 +43,6 @@
                  "height":31,
                  "id":12,
                  "name":"Mr Crabs",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"crab",
                  "visible":true,
@@ -52,10 +54,6 @@
                  "height":31,
                  "id":13,
                  "name":"Ronald Duck",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"duck",
                  "visible":true,
@@ -67,10 +65,6 @@
                  "height":372,
                  "id":15,
                  "name":"wall_c_1",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"wall",
                  "visible":true,
@@ -82,10 +76,6 @@
                  "height":288,
                  "id":17,
                  "name":"wall_d_1",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"wall",
                  "visible":true,
@@ -102,6 +92,12 @@
                      "attribute":"reverse lever_1",
                      "comment":"duck cannot go further",
                      "links":"wall_d_1"
+                    },
+                 "propertytypes":
+                    {
+                     "attribute":"string",
+                     "comment":"string",
+                     "links":"string"
                     },
                  "rotation":0,
                  "type":"lever",
@@ -120,6 +116,12 @@
                      "comment":"",
                      "links":"pressure_plate_1"
                     },
+                 "propertytypes":
+                    {
+                     "attribute":"string",
+                     "comment":"string",
+                     "links":"string"
+                    },
                  "rotation":0,
                  "type":"weight",
                  "visible":true,
@@ -137,6 +139,12 @@
                      "comment":"needs to be cut by te crab",
                      "links":""
                     },
+                 "propertytypes":
+                    {
+                     "attribute":"string",
+                     "comment":"string",
+                     "links":"string"
+                    },
                  "rotation":0,
                  "type":"see_grass",
                  "visible":true,
@@ -148,10 +156,6 @@
                  "height":160,
                  "id":22,
                  "name":"wall_c_3",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"wall",
                  "visible":true,
@@ -169,6 +173,12 @@
                      "comment":"needs crab.weight and weight_d.weight",
                      "links":"c_wall_2"
                     },
+                 "propertytypes":
+                    {
+                     "attribute":"string",
+                     "comment":"string",
+                     "links":"string"
+                    },
                  "rotation":0,
                  "type":"pressure_plate",
                  "visible":true,
@@ -180,10 +190,6 @@
                  "height":192,
                  "id":24,
                  "name":"wall_c_2",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"wall",
                  "visible":true,
@@ -200,6 +206,12 @@
                      "attribute":"reverse lever_1",
                      "comment":"duck cannot go further",
                      "links":"wall_c_3"
+                    },
+                 "propertytypes":
+                    {
+                     "attribute":"string",
+                     "comment":"string",
+                     "links":"string"
                     },
                  "rotation":0,
                  "type":"lever",
@@ -218,6 +230,12 @@
                      "comment":"duck cannot go further",
                      "links":"c_wall_1"
                     },
+                 "propertytypes":
+                    {
+                     "attribute":"string",
+                     "comment":"string",
+                     "links":"string"
+                    },
                  "rotation":0,
                  "type":"lever",
                  "visible":true,
@@ -234,6 +252,12 @@
                      "attribute":"",
                      "comment":"",
                      "links":"pressure_plate_1"
+                    },
+                 "propertytypes":
+                    {
+                     "attribute":"string",
+                     "comment":"string",
+                     "links":"string"
                     },
                  "rotation":0,
                  "type":"weight",
@@ -252,6 +276,12 @@
                      "comment":"",
                      "links":"pressure_plate_1"
                     },
+                 "propertytypes":
+                    {
+                     "attribute":"string",
+                     "comment":"string",
+                     "links":"string"
+                    },
                  "rotation":0,
                  "type":"weight",
                  "visible":true,
@@ -269,6 +299,12 @@
                      "comment":"needs crab.weight and weight_d.weight",
                      "links":"c_wall_2"
                     },
+                 "propertytypes":
+                    {
+                     "attribute":"string",
+                     "comment":"string",
+                     "links":"string"
+                    },
                  "rotation":0,
                  "type":"pressure_plate",
                  "visible":true,
@@ -280,16 +316,23 @@
                  "height":480,
                  "id":30,
                  "name":"wall_c_3",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"wall",
                  "visible":true,
                  "width":64,
                  "x":2620,
                  "y":32
+                }, 
+                {
+                 "height":459,
+                 "id":55,
+                 "name":"",
+                 "rotation":0,
+                 "type":"seaweed",
+                 "visible":true,
+                 "width":28,
+                 "x":1089,
+                 "y":189
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -313,16 +356,45 @@
                      "crab":"true",
                      "duck":"true"
                     },
+                 "propertytypes":
+                    {
+                     "audio_name":"string",
+                     "crab":"string",
+                     "duck":"string"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":80,
                  "x":420,
                  "y":2
+                }, 
+                {
+                 "height":673,
+                 "id":51,
+                 "name":"",
+                 "properties":
+                    {
+                     "audio_name":"Level1Start.ogg",
+                     "crab":true,
+                     "duck":true
+                    },
+                 "propertytypes":
+                    {
+                     "audio_name":"string",
+                     "crab":"bool",
+                     "duck":"bool"
+                    },
+                 "rotation":0,
+                 "type":"audio",
+                 "visible":true,
+                 "width":157,
+                 "x":-16,
+                 "y":-25
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":100,
          "x":0,
          "y":0
@@ -336,10 +408,6 @@
                  "height":704,
                  "id":50,
                  "name":"finish",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"finish",
                  "visible":true,
@@ -349,31 +417,24 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":100,
          "x":0,
          "y":0
         }],
- "nextobjectid":51,
+ "nextobjectid":56,
  "orientation":"orthogonal",
- "properties":
-    {
-
-    },
  "renderorder":"right-down",
  "tileheight":32,
  "tilesets":[
         {
+         "columns":3,
          "firstgid":1,
          "image":"tiles.png",
          "imageheight":32,
          "imagewidth":96,
          "margin":0,
          "name":"tiles",
-         "properties":
-            {
-
-            },
          "spacing":0,
          "tilecount":3,
          "tileheight":32,

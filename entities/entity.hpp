@@ -17,7 +17,9 @@ public:
     virtual ~Entity() {}
 
     virtual void draw(sf::RenderWindow& window) = 0;
-    virtual std::vector<sf::Vector2<int>> get_blocks() const = 0;
+    virtual std::vector<sf::Vector2<int>> get_blocks() const{
+        return std::vector<sf::Vector2<int>>();
+    };
 
     /*
      * Gets the velocity vector of the direction and speed

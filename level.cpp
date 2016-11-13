@@ -9,6 +9,7 @@
 #include "entities/crate.hpp"
 #include "entities/lever.hpp"
 #include "entities/wall.hpp"
+#include "entities/seaweed.hpp"
 #include "util.hpp"
 #include "vectorutils.hpp"
 #include "water_physics.hpp"
@@ -97,6 +98,8 @@ Level::Level(std::string filename)
         } else if (type == "wall") {
             new_entity = new Wall(pos, entity["height"],
                      entity["width"], name);
+        } else if (type == "seaweed"){
+            new_entity = new SeaWeed(pos, name);
         }
 
         if (new_entity != nullptr)
