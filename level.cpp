@@ -402,6 +402,14 @@ void Level::move_camera(sf::RenderWindow& window) {
     }
 
     camera_x = window.getView().getCenter().x;
+    
+    if(camera_x < 400)
+    {
+        camera_x = 400;
+        auto view = window.getView();
+        view.setCenter(camera_x, view.getCenter().y);
+        window.setView(view);
+    }
 }
 
 void Level::update() {
@@ -447,10 +455,11 @@ int Level::get_camera_x()
 
 bool Level::is_finished()
 {
-    return is_pos_in_finish(crab->get_position()) && is_pos_in_finish(duck->get_position())
+    return is_pos_in_finish(crab->get_position()) && is_pos_in_finish(duck->get_position());
 }
 
 bool Level::is_pos_in_finish(sf::Vector2f pos)
 {
-
+    return pos.x > finish.x && pos.x < finish.x + finish.width &&
+           pos.y > finish.y && pos.y < finish.y + finish.height;
 }
