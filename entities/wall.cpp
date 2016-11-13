@@ -1,7 +1,9 @@
 #include "wall.hpp"
+#include <iostream>
 
-Wall::Wall(sf::Vector2<float> position, int height, int width)
-    : Entity(position, WALL_MASS) {
+Wall::Wall(sf::Vector2<float> position, int height,
+        int width, std::string name)
+    : Entity(position, WALL_MASS, name) {
     texture.setRepeated(true);
     texture.loadFromFile("assets/wall.png");
     sprite.setTexture(texture);
@@ -24,5 +26,6 @@ std::vector<sf::Vector2<int>> Wall::get_blocks() const
 
 void Wall::interact() {
     moved = true;
+    std::cout << "Moving " << name << "..." << std::endl;
 }
 
