@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <string>
 #include "block.hpp"
 #include <chipmunk/chipmunk.h>
 
@@ -12,7 +13,7 @@ class Entity {
 
 public:
 
-    Entity(sf::Vector2<float> position, float mass);
+    Entity(sf::Vector2<float> position, float mass, std::string name);
     virtual ~Entity() {}
 
     virtual void draw(sf::RenderWindow& window) = 0;
@@ -31,9 +32,12 @@ public:
     sf::Vector2<float> get_position() const;
     virtual void set_position(const sf::Vector2<float>& position);
     int get_mass() const;
+    std::string get_name() const;
 
 protected:
 
+    std::string name;
+    
     sf::Vector2<float> position;
     float mass;
 

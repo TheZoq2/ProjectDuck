@@ -1,8 +1,8 @@
 #include "crab.hpp"
 #include "vectorutils.hpp"
 
-Crab::Crab(sf::Vector2<float> position, cpSpace* space)
-    : Entity(position, CRAB_MASS)
+Crab::Crab(sf::Vector2<float> position, std::string name, cpSpace* space)
+    : Entity(position, CRAB_MASS, name)
 {
     body_init(TILE_SIZE, TILE_SIZE, space);
     texture.loadFromFile("assets/crab.png");

@@ -10,7 +10,7 @@ class Duck : public Entity {
 
 public:
 
-    Duck(sf::Vector2<float> position, cpSpace* space);
+    Duck(sf::Vector2<float> position, cpSpace* space, std::string name);
 
     virtual void draw(sf::RenderWindow& window) override;
     virtual std::vector<sf::Vector2<int>> get_blocks() const override;

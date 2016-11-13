@@ -4,8 +4,8 @@
 
 #include <iostream>
 
-Lever::Lever(sf::Vector2<float> position) : 
-    Entity(position, 0)
+Lever::Lever(sf::Vector2<float> position, std::string name) : 
+    Entity(position, 0, name)
 {
     main_texture.loadFromFile("assets/lever.png"); 
     pulled_texture.loadFromFile("assets/lever_pulled.png");

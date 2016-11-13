@@ -1,10 +1,11 @@
 #include "entity.hpp"
 #include <vectorutils.hpp>
 
-Entity::Entity(sf::Vector2<float> position, float mass) {
+Entity::Entity(sf::Vector2<float> position, float mass, std::string name) {
     this->mass = mass;
     this->position = position;
     this->body = nullptr;
+    this->name = name;
 }
 
 bool Entity::can_interact_with(PlayerType type,
@@ -37,3 +38,6 @@ void Entity::body_init(int width, int height, cpSpace* space) {
             cpBoxShapeNew(body, width, height));
 }
 
+std::string Entity::get_name() const {
+    return name;
+}
