@@ -1,19 +1,20 @@
 #include <iostream>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include <ctime>
-#include <chrono>
-#include <thread>
+#include <SFML/OpenGL.hpp>
 
 #include "wave.h"
 #include "entities/entity.hpp"
 #include "level.hpp"
-
+#include "sfml_icon.hpp"
 
 int main() {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 16;
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Hello my friend! :)", sf::Style::Close, settings);
+	window.setFramerateLimit(60);
+
+	//window.SetIcon( sfml_icon.width,  sfml_icon.height,  sfml_icon.pixel_data ); 
 
 	sf::Texture bTexture;
 	sf::Sprite bImage;
@@ -32,9 +33,6 @@ int main() {
 
 	while (window.isOpen())
 	{
-
-		std::chrono::time_point<std::chrono::system_clock> start, end;
-		start = std::chrono::system_clock::now();
 
         sf::Event event;
         while (window.pollEvent(event))
@@ -57,11 +55,6 @@ int main() {
 		wave.draw(window);
 
 		window.display();
-
-
-		end = std::chrono::system_clock::now();
-		std::chrono::duration<double> elapsed_seconds = end-start;
-		std::this_thread::sleep_for(std::chrono::milliseconds(16 - (int)elapsed_seconds.count())); 
 	}
 
 	return 0;
