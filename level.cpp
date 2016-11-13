@@ -176,6 +176,17 @@ Level::Level(std::string filename)
 
         this->audio_zones.push_back(result);
     }
+
+    auto finish_layer = level_json_data["layers"][3];
+    auto finish_data = finish_layer["objects"];
+
+    for(auto finish : finish_data)
+    {
+        this->finish.x = finish["x"];
+        this->finish.y = finish["y"];
+        this->finish.width = finish["width"];
+        this->finish.height = finish["height"];
+    }
 }
 
 static void ShapeFreeWrap(cpSpace *space, cpShape *shape, void *unused){
@@ -434,4 +445,14 @@ void Level::update() {
 int Level::get_camera_x()
 {
     return camera_x;
+}
+
+bool Level::is_finished()
+{
+    return is_pos_in_finish(crab->get_position()) && is_pos_in_finish(duck->get_position())
+}
+
+bool Level::is_pos_in_finish(sf::Vector2f pos)
+{
+
 }

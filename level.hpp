@@ -27,7 +27,9 @@ public:
 
     int get_camera_x();
 
+    bool is_finished();
 private:
+    bool is_pos_in_finish(sf::Vector2f pos);
 
     void init_physics();
 
@@ -58,6 +60,17 @@ private:
     void move_camera(sf::RenderWindow& window);
 
     int camera_x;
+
+    struct FinishArea
+    {
+        int x;
+        int y;
+        int width;
+        int height;
+    };
+
+    FinishArea finish;
 };
+
 
 #endif
