@@ -9,6 +9,6 @@ const float FLUID_DRAG = 1.0;
 
 const float DT = 1.0 / 60.0f;
 const int DUCK_CRAB_DELAY = 10;
-const float DUCK_CRAB_SCALE = 0.07;
+const float DUCK_CRAB_SCALE = 0.1;
 
 #endif /* ifndef  */
