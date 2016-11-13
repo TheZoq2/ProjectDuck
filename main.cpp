@@ -1,4 +1,5 @@
 #include <iostream>
+#include <deque>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
@@ -223,7 +224,11 @@ int main() {
 	Wave wave(3300, 400, 400);
 	Wave wavebg(3300, 400, 400);
 
-	Level level("assets/level.json");
+    std::deque<std::string>  levels;
+    levels.push_back("assets/level.json");
+    levels.push_back("assets/level2json");
+
+	Level* level = new Level(levels.front());
 
 	while (window.isOpen())
 	{
@@ -239,14 +244,23 @@ int main() {
 
 		//window.draw(bImage);
 		wave.update();
-        wave.set_camera_position(level.get_camera_x());
+        wave.set_camera_position(level->get_camera_x());
 		wavebg.update();
-        wavebg.set_camera_position(level.get_camera_x());
+        wavebg.set_camera_position(level->get_camera_x());
 
-		level.update();
+		level->update();
 		wavebg.draw(window);
-		level.draw(window);
+		level->draw(window);
 		wave.draw(window);
+
+        if(level->is_finished())
+        {
+            levels.pop_front();
+
+            std::string new_level = levels.front();
+            delete level;
+            level = new Level("assets/level2.json");
+        }
 
 		window.display();
 	}
