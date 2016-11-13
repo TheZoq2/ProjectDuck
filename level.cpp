@@ -18,6 +18,12 @@ using namespace std;
 // For JSON parsing
 using namespace nlohmann;
 
+void add_tile_body(cpSpace* space, cpVect pos) {
+    cpBody* body = cpSpaceGetStaticBody(space);
+    cpBB bb = cpBBNew(pos.x, pos.y, pos.x + TILE_SIZE, pos.y + TILE_SIZE);
+    cpSpaceAddShape(space, cpBoxShapeNew2(body, bb));
+}
+
 Level::Level(std::string filename)
 {
     const auto tile_file = "assets/tiles.png";
@@ -36,6 +42,8 @@ Level::Level(std::string filename)
 
     grid.resize(width);
 
+    init_physics();
+
     int tile_x = 0, tile_y = 0;
     for (int tile_index : tile_layer_data) {
         Block* block = nullptr;
@@ -43,8 +51,11 @@ Level::Level(std::string filename)
             sf::Sprite sprite;
             sprite.setTexture(tile_texture);
             sprite.setTextureRect(sf::IntRect((tile_index - 1) * TILE_SIZE, 0, TILE_SIZE, TILE_SIZE));
-            sprite.setPosition(sf::Vector2f(tile_x * TILE_SIZE, tile_y * TILE_SIZE));
+            sf::Vector2f pos = sf::Vector2f(tile_x * TILE_SIZE, tile_y * TILE_SIZE);
+            sprite.setPosition(pos);
 
+            if (tile_index == 3)
+                add_tile_body(space, graphics_to_physics(pos));
             block = new Block(sprite);
         }
         grid[tile_x].push_back(block);
@@ -55,9 +66,6 @@ Level::Level(std::string filename)
             tile_x = 0;
         }
     }
-
-    init_physics();
-
 
     //Loading entities
     auto entity_layer = level_json_data["layers"][1];

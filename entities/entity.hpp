@@ -37,7 +37,7 @@ public:
 protected:
 
     std::string name;
-    
+
     sf::Vector2<float> position;
     float mass;
 

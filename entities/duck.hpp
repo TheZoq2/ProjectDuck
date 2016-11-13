@@ -5,6 +5,7 @@
 #include "constants.hpp"
 
 const static float DUCK_MASS = 0.1;
+const static int NUM_DUCK_SPRITES = 3;
 
 class Duck : public Entity {
 
@@ -18,9 +19,10 @@ public:
     virtual void set_position(const sf::Vector2<float>& position) override;
 
 private:
-    sf::Sprite sprite;
-    sf::Texture texture;
-
+    sf::Sprite sprites[NUM_DUCK_SPRITES];
+    sf::Texture textures[NUM_DUCK_SPRITES];
+    int current_sprite;
+    int delay;
 };
 
 #endif
