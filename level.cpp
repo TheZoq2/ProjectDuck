@@ -392,6 +392,8 @@ void Level::move_camera(sf::RenderWindow& window) {
         camera_view.setCenter(duck->get_position().x - camera_center+200,300);
         window.setView(camera_view);
     }
+
+    camera_x = window.getView().getCenter().x;
 }
 
 void Level::update() {
@@ -428,3 +430,8 @@ void Level::update() {
     }
 }
 
+
+int Level::get_camera_x()
+{
+    return camera_x;
+}
