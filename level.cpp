@@ -12,6 +12,7 @@
 #include "util.hpp"
 #include "vectorutils.hpp"
 #include "water_physics.hpp"
+#include "entities/pressure_plate.hpp"
 
 using namespace std;
 // For JSON parsing
@@ -97,6 +98,8 @@ Level::Level(std::string filename)
         } else if (type == "wall") {
             new_entity = new Wall(pos, entity["height"],
                      entity["width"], name);
+        } else if (type == "pressure_plate") {
+            new_entity = new PressurePlate(pos, name, space);
         }
 
         if (new_entity != nullptr)
