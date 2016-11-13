@@ -1,15 +1,17 @@
 #include "duck.hpp"
 #include <SFML/System.hpp>
 
-Duck::Duck(sf::Vector2<double> position)
+Duck::Duck(sf::Vector2<double> position, cpSpace* space)
     : Entity(position, DUCK_MASS)
 {
+    body_init(TILE_SIZE, TILE_SIZE, space);
     texture.loadFromFile("assets/duck.png");
     sprite.setTexture(texture);
 }
 
 void Duck::draw(sf::RenderWindow& window) {
-    sprite.setPosition(position.x, position.y);
+    cpVect pos = cpBodyGetPos(body);
+    sprite.setPosition(pos.x, pos.y);
     window.draw(sprite);
 }
 
@@ -26,5 +28,10 @@ sf::Vector2<double> Duck::wants_to_move() const {
         velocity.x += DUCK_CRAB_SPEED;
     }
     return velocity;
+}
+
+void Duck::set_position(const sf::Vector2<double>& position) {
+    this->position = position;
+    cpBodySetPos(body, cpv(position.x, position.y));
 }
 
