@@ -221,6 +221,7 @@ int main() {
 	bImage.setScale(1.0f, 600.0f/ bTexture.getSize().y);
 
 	Wave wave(3300, 400, 400);
+	Wave wavebg(3300, 400, 400);
 
 	Level level("assets/level.json");
 
@@ -238,10 +239,14 @@ int main() {
 
 		//window.draw(bImage);
 		wave.update();
+        wave.set_camera_position(level.get_camera_x());
+		wavebg.update();
+        wavebg.set_camera_position(level.get_camera_x());
 
 		level.update();
-		wave.draw(window);
+		wavebg.draw(window);
 		level.draw(window);
+		wave.draw(window);
 
 		window.display();
 	}

@@ -1,4 +1,5 @@
 uniform float iGlobalTime;
+uniform float camera_x;
 const vec2 iResolution = vec2(800, 600);
 
 varying vec4 vertexPosition;
@@ -26,8 +27,8 @@ float bubbleStrength(vec2 startPos, vec2 waveOffset, float radius, float speed, 
 void main()
 {
 	vec2 uv = gl_FragCoord.xy / iResolution.xy;
-	vec2 coord = vec2(gl_FragCoord.x, iResolution.y - gl_FragCoord.y);
-    //vec2 coord = vertexPosition.xy;
+	vec2 coord = vec2(gl_FragCoord.x + camera_x - 500., iResolution.y - gl_FragCoord.y);
+    //vec2 coord = vec2(vertexPosition.x * 10., vertexPosition.y * 10.);
 	
 	// Calculate the lookup transformation offset for the current fragment
 	float offsetX = (0.1112 * iResolution.x * cos(1.44125 * (iGlobalTime + uv.y))) + (26.77311 * iGlobalTime);
@@ -117,7 +118,7 @@ void main()
 		bubble8 * 0.11;
     //gl_FragColor = vec4(coord.x, coord.y, 0., iGlobalTime);
 	
-    //gl_FragColor = vec4(gl_FragColor.xyz, 0.6 + gl_FragColor.x * 0.4);
+    gl_FragColor = vec4(gl_FragColor.xyz, 1. - 0.7 + gl_FragColor.x * 0.3);
 	// Uncomment this line if you want to see just the rays:
 	//gl_FragColor = rays1 * 0.5 + rays2 * 0.5;
 	

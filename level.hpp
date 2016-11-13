@@ -25,6 +25,8 @@ public:
 
     void update();
 
+    int get_camera_x();
+
 private:
 
     void init_physics();
@@ -54,6 +56,8 @@ private:
     void physics();
 
     void move_camera(sf::RenderWindow& window);
+
+    int camera_x;
 };
 
 #endif

@@ -10,6 +10,8 @@ public:
 
 	void draw(sf::RenderWindow& window);
 	void update();
+
+    void set_camera_position(float x);
 private:
 	sf::VertexArray vertices;
 	float height;
@@ -20,5 +22,7 @@ private:
 	std::size_t segment_amount;
 
     sf::Shader shader;
+
+    float camera_x;
 };
 #endif
