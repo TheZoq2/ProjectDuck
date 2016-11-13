@@ -25,6 +25,8 @@ public:
 
     void update();
 
+    int get_camera_x();
+
 private:
 
     void init_physics();
@@ -56,6 +58,8 @@ private:
     void move_camera(sf::RenderWindow& window);
 
     Entity* find_entity(std::string name);
+
+    int camera_x;
 };
 
 #endif
