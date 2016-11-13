@@ -214,7 +214,7 @@ int main() {
 	sf::Texture bTexture;
 	sf::Sprite bImage;
 
-	if(!bTexture.loadFromFile("assets/background.png")){
+	if(!bTexture.loadFromFile("assets/background grande-01.png")){
 		std::cout << "Could not load background image" << std::endl;
 	}
 
@@ -242,7 +242,7 @@ int main() {
 
 		window.clear(sf::Color::Blue);
 
-		//window.draw(bImage);
+		window.draw(bImage);
 		wave.update();
         wave.set_camera_position(level->get_camera_x());
 		wavebg.update();
@@ -259,7 +259,7 @@ int main() {
 
             std::string new_level = levels.front();
             delete level;
-            level = new Level("assets/level2.json");
+            level = new Level(new_level);
         }
 
 		window.display();

@@ -106,7 +106,7 @@ Level::Level(std::string filename)
             new_entity = new Crate(pos, name);
         } else if (type == "wall") {
             new_entity = new Wall(pos, entity["height"],
-                     entity["width"], name);
+                     entity["width"], name, space);
         } else if (type == "seaweed"){
             new_entity = new SeaWeed(pos, sf::Vector2f(entity["width"], entity["height"]), name, space);
         } else if (type == "pressure_plate") {
