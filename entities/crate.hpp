@@ -8,7 +8,7 @@ const static int CRATE_MASS = 2;
 class Crate : public Entity {
 public:
 
-    Crate(sf::Vector2<double> position);
+    Crate(sf::Vector2<float> position);
     virtual void draw(sf::RenderWindow& window) override;
     virtual std::vector<sf::Vector2<int>> get_blocks() const override;
 

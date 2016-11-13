@@ -9,16 +9,16 @@
 class AudioZone 
 {
 public:
-    AudioZone(sf::Vector2<double> position, sf::Vector2<double> size, bool duck, bool crab, std::string file);
+    AudioZone(sf::Vector2<float> position, sf::Vector2<float> size, bool duck, bool crab, std::string file);
 
-    void try_play(sf::Vector2<double> crab_pos, sf::Vector2<double> duck_pos);
+    void try_play(sf::Vector2<float> crab_pos, sf::Vector2<float> duck_pos);
 private:
-    void try_play_generic(sf::Vector2<double> pos);
+    void try_play_generic(sf::Vector2<float> pos);
 
     bool has_played = false;
 
-    sf::Vector2<double> position;
-    sf::Vector2<double> size;
+    sf::Vector2<float> position;
+    sf::Vector2<float> size;
     bool duck;
     bool crab;
 

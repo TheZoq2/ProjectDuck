@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-Lever::Lever(sf::Vector2<double> position) : 
+Lever::Lever(sf::Vector2<float> position) : 
     Entity(position, 0)
 {
     main_texture.loadFromFile("assets/lever.png"); 
@@ -41,7 +41,7 @@ void Lever::interact() {
 	}
 }
 
-bool Lever::can_interact_with(PlayerType type, sf::Vector2<double> position) {
+bool Lever::can_interact_with(PlayerType type, sf::Vector2<float> position) {
     return (distance(position, this->position) < INTERACT_DISTANCE);
 }
 

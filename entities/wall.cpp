@@ -1,6 +1,6 @@
 #include "wall.hpp"
 
-Wall::Wall(sf::Vector2<double> position, int height, int width)
+Wall::Wall(sf::Vector2<float> position, int height, int width)
     : Entity(position, WALL_MASS) {
     texture.setRepeated(true);
     texture.loadFromFile("assets/wall.png");
@@ -15,12 +15,6 @@ Wall::Wall(sf::Vector2<double> position, int height, int width)
 
 void Wall::draw(sf::RenderWindow& window) {
     window.draw(sprite);
-}
-
-void Wall::wants_to_move() {
-	cpBodySetVel(body, cpv(0, 0));
-    if (moved)
-        cpBodySetVel(body, cpv(0, 10));
 }
 
 std::vector<sf::Vector2<int>> Wall::get_blocks() const

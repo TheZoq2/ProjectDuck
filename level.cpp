@@ -132,13 +132,13 @@ Level::Level(std::string filename)
 
         Entity* new_entity = nullptr;
         
-        sf::Vector2<double> pos(x, y);
+        sf::Vector2<float> pos(x, y);
 
         if (type == "lever")
         {
             new_entity = new Lever(pos);
         } else if (type == "crab") {
-            new_entity = new Crab(pos);
+            new_entity = new Crab(pos, space);
             this->crab = (Crab*)new_entity;
         } else if (type == "duck") {
             new_entity = new Duck(pos, space);
@@ -173,7 +173,7 @@ Level::Level(std::string filename)
         bool duck = true;
         bool crab = true;
 
-        AudioZone result(sf::Vector2<double>(x, y), sf::Vector2<double>(width, height), duck, crab, "assets/" + filename);
+        AudioZone result(sf::Vector2<float>(x, y), sf::Vector2<float>(width, height), duck, crab, "assets/" + filename);
 
         this->audio_zones.push_back(result);
     }

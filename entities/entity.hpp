@@ -12,7 +12,7 @@ class Entity {
 
 public:
 
-    Entity(sf::Vector2<double> position, int mass);
+    Entity(sf::Vector2<float> position, float mass);
     virtual ~Entity() {}
 
     virtual void draw(sf::RenderWindow& window) = 0;
@@ -26,16 +26,16 @@ public:
     virtual void interact();
 
     virtual bool
-        can_interact_with(PlayerType type, sf::Vector2<double> position);
+        can_interact_with(PlayerType type, sf::Vector2<float> position);
 
-    sf::Vector2<double> get_position() const;
-    virtual void set_position(const sf::Vector2<double>& position);
+    sf::Vector2<float> get_position() const;
+    virtual void set_position(const sf::Vector2<float>& position);
     int get_mass() const;
 
 protected:
 
-    sf::Vector2<double> position;
-    int mass;
+    sf::Vector2<float> position;
+    float mass;
 
     virtual void body_init(int width, int height, cpSpace* space);
 

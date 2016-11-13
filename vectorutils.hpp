@@ -3,10 +3,10 @@
 #include <SFML/Graphics.hpp>
 #include <chipmunk/chipmunk.h>
 
-double distance(sf::Vector2<int> v1, sf::Vector2<int> v2);
-double distance(sf::Vector2<double> v1, sf::Vector2<int> v2);
-double distance(sf::Vector2<int> v1, sf::Vector2<double> v2);
-double distance(sf::Vector2<double> v1, sf::Vector2<double> v2);
+float distance(sf::Vector2<int> v1, sf::Vector2<int> v2);
+float distance(sf::Vector2<float> v1, sf::Vector2<int> v2);
+float distance(sf::Vector2<int> v1, sf::Vector2<float> v2);
+float distance(sf::Vector2<float> v1, sf::Vector2<float> v2);
 
 
 sf::Vector2f physics_to_graphics(cpVect vec);
