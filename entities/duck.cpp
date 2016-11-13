@@ -6,15 +6,27 @@ Duck::Duck(sf::Vector2<float> position, cpSpace* space, std::string name)
     : Entity(position, DUCK_MASS, name)
 {
     body_init(TILE_SIZE, TILE_SIZE, space);
-    texture.loadFromFile("assets/duck.png");
-    sprite.setTexture(texture);
+    textures[0].loadFromFile("assets/duck1.png");
+    textures[1].loadFromFile("assets/duck2.png");
+    textures[2].loadFromFile("assets/duck3.png");
+    for (int i = 0; i < NUM_DUCK_SPRITES; ++i) {
+        sprites[i].setTexture(textures[i]);
+        sprites[i].setScale(DUCK_CRAB_SCALE, DUCK_CRAB_SCALE);
+    }
+    current_sprite = 0;
+    delay = 0;
 }
 
 void Duck::draw(sf::RenderWindow& window) {
     cpVect pos = cpBodyGetPos(body);
     position = physics_to_graphics(pos);
-    sprite.setPosition(position.x, position.y);
-    window.draw(sprite);
+    sprites[current_sprite].setPosition(position.x, position.y);
+    window.draw(sprites[current_sprite]);
+    delay++;
+    if (delay == DUCK_CRAB_DELAY) {
+        delay = 0;
+        current_sprite = (current_sprite + 1) % 3;
+    }
 }
 
 std::vector<sf::Vector2<int>> Duck::get_blocks() const {
@@ -22,8 +34,7 @@ std::vector<sf::Vector2<int>> Duck::get_blocks() const {
 }
 
 void Duck::move() {
-    cpVect velocity;
-    velocity.y = cpBodyGetVel(body).y;
+    cpVect velocity = cpv(0, 0);
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)) {
         velocity.x -= DUCK_CRAB_SPEED;
@@ -31,7 +42,14 @@ void Duck::move() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
         velocity.x += DUCK_CRAB_SPEED;
     }
-	cpBodySetVel(body, velocity);
+
+	cpBodyApplyImpulse(body, cpvmult(velocity, DT), cpv(0, 0));
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::I)) {
+        cpVect vel = cpBodyGetVel(body);
+        vel.y = 400;
+        cpBodySetVel(body, vel);
+    }
 }
 
 void Duck::set_position(const sf::Vector2<float>& position) {

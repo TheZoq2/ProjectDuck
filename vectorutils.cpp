@@ -28,6 +28,6 @@ sf::Vector2f physics_to_graphics(cpVect vec) {
 cpVect graphics_to_physics(sf::Vector2f vec) {
     cpVect newVec;
     newVec.x = vec.x;
-    newVec.y = vec.y;
+    newVec.y = 600 - vec.y;
     return newVec;
 }
