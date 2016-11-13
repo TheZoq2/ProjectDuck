@@ -402,7 +402,7 @@
                  "name":"",
                  "properties":
                     {
-                     "audio_name":"Level1Start.ogg",
+                     "audio_name":"MotherIsTrash.ogg",
                      "crab":"true",
                      "duck":"true"
                     },
@@ -416,8 +416,8 @@
                  "type":"",
                  "visible":true,
                  "width":336,
-                 "x":-33,
-                 "y":-35
+                 "x":1660,
+                 "y":-38
                 }, 
                 {
                  "height":576,
@@ -441,6 +441,52 @@
                  "width":213,
                  "x":1139,
                  "y":28.5
+                }, 
+                {
+                 "height":695,
+                 "id":61,
+                 "name":"",
+                 "properties":
+                    {
+                     "audio_name":"Level1Start.ogg",
+                     "crab":"true",
+                     "duck":"true"
+                    },
+                 "propertytypes":
+                    {
+                     "audio_name":"string",
+                     "crab":"string",
+                     "duck":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":336,
+                 "x":-28,
+                 "y":-165.5
+                }, 
+                {
+                 "height":695,
+                 "id":62,
+                 "name":"",
+                 "properties":
+                    {
+                     "audio_name":"FuckMyNameIsAlice.ogg",
+                     "crab":"true",
+                     "duck":"true"
+                    },
+                 "propertytypes":
+                    {
+                     "audio_name":"string",
+                     "crab":"string",
+                     "duck":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":336,
+                 "x":2273,
+                 "y":-38.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -472,7 +518,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":60,
+ "nextobjectid":63,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,
