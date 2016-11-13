@@ -1,6 +1,7 @@
 #include "duck.hpp"
 #include <SFML/System.hpp>
 #include <vectorutils.hpp>
+#include <iostream>
 
 Duck::Duck(sf::Vector2<float> position, cpSpace* space, std::string name)
     : Entity(position, DUCK_MASS, name)
@@ -20,6 +21,13 @@ Duck::Duck(sf::Vector2<float> position, cpSpace* space, std::string name)
 }
 
 void Duck::draw(sf::RenderWindow& window) {
+    if(jump_cd != 0)
+    {
+        jump_cd--;
+    }
+
+    std::cout << jump_cd << std::endl;
+
     cpVect pos = cpBodyGetPos(body);
     position = physics_to_graphics(pos);
     sprites[current_sprite].setPosition(position.x, position.y);
@@ -44,10 +52,12 @@ void Duck::move() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
         impulse.x += DUCK_CRAB_SPEED;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::I)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::I) && jump_cd == 0) {
         if(can_jump())
         {
-            impulse.y = 400;
+            impulse.y = 3000;
+
+            jump_cd = 60;
         }
     }
 

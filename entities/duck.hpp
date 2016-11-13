@@ -27,6 +27,8 @@ private:
     int delay;
 
     cpSpace* space = nullptr;
+
+    int jump_cd = 0;
 };
 
 #endif
