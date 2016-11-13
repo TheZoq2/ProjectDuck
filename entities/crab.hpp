@@ -5,6 +5,7 @@
 #include "constants.hpp"
 
 const static int CRAB_MASS = 1;
+const static int NUM_CRAB_SPRITES = 3;
 
 class Crab : public Entity {
 
@@ -17,8 +18,10 @@ public:
     virtual void move() override;
 
 private:
-    sf::Sprite sprite;
-    sf::Texture texture;
+    sf::Sprite sprites[NUM_CRAB_SPRITES];
+    sf::Texture textures[NUM_CRAB_SPRITES];
+    int current_sprite;
+    int delay;
 };
 
 #endif
