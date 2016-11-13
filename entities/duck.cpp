@@ -1,6 +1,7 @@
 #include "duck.hpp"
 #include <SFML/System.hpp>
 #include <vectorutils.hpp>
+#include <iostream>
 
 Duck::Duck(sf::Vector2<float> position, cpSpace* space, std::string name)
     : Entity(position, DUCK_MASS, name)
@@ -15,9 +16,18 @@ Duck::Duck(sf::Vector2<float> position, cpSpace* space, std::string name)
     }
     current_sprite = 0;
     delay = 0;
+
+    this->space = space;
 }
 
 void Duck::draw(sf::RenderWindow& window) {
+    if(jump_cd != 0)
+    {
+        jump_cd--;
+    }
+
+    std::cout << jump_cd << std::endl;
+
     cpVect pos = cpBodyGetPos(body);
     position = physics_to_graphics(pos);
     sprites[current_sprite].setPosition(position.x, position.y);
@@ -34,22 +44,39 @@ std::vector<sf::Vector2<int>> Duck::get_blocks() const {
 }
 
 void Duck::move() {
-    cpVect velocity = cpv(0, 0);
+    cpVect impulse = cpv(0, 0);
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)) {
-        velocity.x -= DUCK_CRAB_SPEED;
+        impulse.x -= DUCK_CRAB_SPEED;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
-        velocity.x += DUCK_CRAB_SPEED;
+        impulse.x += DUCK_CRAB_SPEED;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::I) && jump_cd == 0) {
+        if(can_jump())
+        {
+            impulse.y = 3000;
+
+            jump_cd = 60;
+        }
     }
 
-	cpBodyApplyImpulse(body, cpvmult(velocity, DT), cpv(0, 0));
+	cpBodyApplyImpulse(body, cpvmult(impulse, DT), cpv(0, 0));
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::I)) {
-        cpVect vel = cpBodyGetVel(body);
-        vel.y = 400;
-        cpBodySetVel(body, vel);
+    cpVect vel = cpBodyGetVel(body);
+
+    if(vel.x > DUCK_CRAB_SPEED)
+    {
+        vel.x = DUCK_CRAB_SPEED;
     }
+    else if(vel.x < -DUCK_CRAB_SPEED)
+    {
+        vel.x = -DUCK_CRAB_SPEED;
+    }
+
+
+
+    cpBodySetVel(body, vel);
 }
 
 void Duck::set_position(const sf::Vector2<float>& position) {
@@ -57,3 +84,12 @@ void Duck::set_position(const sf::Vector2<float>& position) {
     cpBodySetPos(body, graphics_to_physics(sf::Vector2f(position.x, position.y)));
 }
 
+
+bool Duck::can_jump()
+{
+    cpVect point = cpBodyGetPos(body);
+    point.y -= 20;
+    cpShape* shape = cpSpaceNearestPointQueryNearest(space, point, 1, CP_ALL_LAYERS, CP_NO_GROUP, nullptr);
+
+    return shape != nullptr;
+}

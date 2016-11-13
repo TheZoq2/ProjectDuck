@@ -226,7 +226,7 @@ int main() {
 
     std::deque<std::string>  levels;
     levels.push_back("assets/level.json");
-    levels.push_back("assets/level2json");
+    levels.push_back("assets/level_2.json");
 
 	Level* level = new Level(levels.front());
 
