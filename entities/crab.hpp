@@ -4,7 +4,7 @@
 #include "entity.hpp"
 #include "constants.hpp"
 
-const static int CRAB_MASS = 3;
+const static int CRAB_MASS = 1;
 
 class Crab : public Entity {
 

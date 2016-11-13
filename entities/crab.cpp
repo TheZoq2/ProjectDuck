@@ -21,8 +21,7 @@ std::vector<sf::Vector2<int>> Crab::get_blocks() const {
 }
 
 void Crab::move() {
-    cpVect velocity;
-    velocity.y = cpBodyGetVel(body).y;
+    cpVect velocity = cpv(0, 0);
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         velocity.x -= DUCK_CRAB_SPEED;
@@ -30,5 +29,12 @@ void Crab::move() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         velocity.x += DUCK_CRAB_SPEED;
     }
-	cpBodySetVel(body, velocity);
+
+	cpBodyApplyImpulse(body, cpvmult(velocity, DT), cpv(0, 0));
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+        cpVect vel = cpBodyGetVel(body);
+        vel.y = 400;
+        cpBodySetVel(body, vel);
+    }
 }

@@ -22,8 +22,7 @@ std::vector<sf::Vector2<int>> Duck::get_blocks() const {
 }
 
 void Duck::move() {
-    cpVect velocity;
-    velocity.y = cpBodyGetVel(body).y;
+    cpVect velocity = cpv(0, 0);
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)) {
         velocity.x -= DUCK_CRAB_SPEED;
@@ -31,7 +30,14 @@ void Duck::move() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
         velocity.x += DUCK_CRAB_SPEED;
     }
-	cpBodySetVel(body, velocity);
+
+	cpBodyApplyImpulse(body, cpvmult(velocity, DT), cpv(0, 0));
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::I)) {
+        cpVect vel = cpBodyGetVel(body);
+        vel.y = 400;
+        cpBodySetVel(body, vel);
+    }
 }
 
 void Duck::set_position(const sf::Vector2<float>& position) {

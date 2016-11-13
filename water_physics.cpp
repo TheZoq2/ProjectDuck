@@ -69,15 +69,15 @@ void init_water_physics(cpSpace* space, float map_width) {
     float border_height = 2000;
 
 	// Create segments around the edge of the screen.
-	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(0, 0), cpv(0, border_height), 0.0f));
+	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(0, 0), cpv(0, border_height), 5.0f));
 	cpShapeSetElasticity(shape, 1.0f);
 	cpShapeSetFriction(shape, 1.0f);
 
-	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(map_width, 0), cpv(map_width, border_height), 0.0f));
+	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(map_width, 0), cpv(map_width, border_height), 5.0f));
 	cpShapeSetElasticity(shape, 1.0f);
 	cpShapeSetFriction(shape, 1.0f);
 
-	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(0, 0), cpv(map_width, 0), 0.0f));
+	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(0, 0), cpv(map_width, 0), 5.0f));
 	cpShapeSetElasticity(shape, 1.0f);
 	cpShapeSetFriction(shape, 1.0f);
 
