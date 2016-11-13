@@ -16,7 +16,7 @@ using namespace std;
 using namespace nlohmann;
 
 const float FLUID_DENSITY = 0.00014;
-const float FLUID_DRAG = 2.0;
+const float FLUID_DRAG = 1.0;
 
 static bool water_pre_solve(cpArbiter* arb, cpSpace *space, void* ptr) {
     CP_ARBITER_GET_SHAPES(arb, water, poly)
@@ -225,6 +225,10 @@ Level::~Level() {
     cpSpaceFree(space);
 }
 
+sf::Vector2f physics_to_graphics(cpVect vec) {
+    return sf::Vector2f(vec.x, 600-vec.y);
+}
+
 void Level::draw(sf::RenderWindow& window)
 {
     move_camera(window);
@@ -258,11 +262,11 @@ void Level::draw(sf::RenderWindow& window)
 
     cpVect pos = cpBodyGetPos(box_body1);
     rectangle1.setRotation(cpBodyGetAngle(box_body1));
-    rectangle1.setPosition(sf::Vector2f(pos.x, pos.y));
+    rectangle1.setPosition(physics_to_graphics(pos));
 
     pos = cpBodyGetPos(box_body2);
     rectangle2.setRotation(cpBodyGetAngle(box_body2));
-    rectangle2.setPosition(sf::Vector2f(pos.x, pos.y));
+    rectangle2.setPosition(physics_to_graphics(pos));
 
     window.draw(rectangle1);
     window.draw(rectangle2);
@@ -283,43 +287,29 @@ void Level::init_physics() {
 	cpBody *body, *staticBody = cpSpaceGetStaticBody(space);
 	cpShape *shape;
 
+    float map_width = width * TILE_SIZE;
+    float border_height = 2000;
+
 	// Create segments around the edge of the screen.
-	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(0, 0), cpv(0, 600), 0.0f));
+	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(0, 0), cpv(0, border_height), 0.0f));
 	cpShapeSetElasticity(shape, 1.0f);
 	cpShapeSetFriction(shape, 1.0f);
 
-	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(1000, 0), cpv(1000, 600), 0.0f));
+	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(map_width, 0), cpv(map_width, border_height), 0.0f));
 	cpShapeSetElasticity(shape, 1.0f);
 	cpShapeSetFriction(shape, 1.0f);
 
-	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(0, 0), cpv(1000, 0), 0.0f));
-	cpShapeSetElasticity(shape, 1.0f);
-	cpShapeSetFriction(shape, 1.0f);
-
-	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(0, 600), cpv(1000, 600), 0.0f));
+	shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(0, 0), cpv(map_width, 0), 0.0f));
 	cpShapeSetElasticity(shape, 1.0f);
 	cpShapeSetFriction(shape, 1.0f);
 
 	{
-		// Add the edges of the bucket
-		cpBB bb = cpBBNew(400, 200, 1200, 600);
-		cpFloat radius = 5.0f;
-
-		shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(bb.l, bb.t), cpv(bb.l, bb.b), radius));
-		cpShapeSetElasticity(shape, 1.0f);
-		cpShapeSetFriction(shape, 1.0f);
-
-		shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(bb.r, bb.t), cpv(bb.r, bb.b), radius));
-		cpShapeSetElasticity(shape, 1.0f);
-		cpShapeSetFriction(shape, 1.0f);
-
-		shape = cpSpaceAddShape(space, cpSegmentShapeNew(staticBody, cpv(bb.l, bb.b), cpv(bb.r, bb.b), radius));
-		cpShapeSetElasticity(shape, 1.0f);
-		cpShapeSetFriction(shape, 1.0f);
+        float water_height = 400;
+		cpBB bb = cpBBNew(0, 0, map_width, water_height);
 
 		// Add the sensor for the water.
 		shape = cpSpaceAddShape(space, cpBoxShapeNew2(staticBody, bb));
-		cpShapeSetSensor(shape, cpTrue);
+		cpShapeSetSensor(shape, true);
 		cpShapeSetCollisionType(shape, 1);
 	}
 
@@ -334,7 +324,7 @@ void Level::init_physics() {
 		cpFloat moment = cpMomentForBox(mass, width, height);
 
 		body = cpSpaceAddBody(space, cpBodyNew(mass, moment));
-		cpBodySetPos(body, cpv(700, 100));
+		cpBodySetPos(body, cpv(700, 300));
 		cpBodySetVel(body, cpv(0, 100));
 		cpBodySetAngVel(body, 1);
 
@@ -353,7 +343,7 @@ void Level::init_physics() {
 		cpFloat moment = cpMomentForBox(mass, width, height);
 
 		body = cpSpaceAddBody(space, cpBodyNew(mass, moment));
-		cpBodySetPos(body, cpv(800, 50));
+		cpBodySetPos(body, cpv(800, 300));
 		cpBodySetVel(body, cpv(0, 100));
 		cpBodySetAngVel(body, 1);
 
@@ -370,20 +360,20 @@ void Level::init_physics() {
 
 void Level::physics() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        cpBodySetVel(box_body1, cpv(0, -100));
+        cpBodySetVel(box_body1, cpv(0, 400));
         cpBodySetAngVel(box_body1, 10);
     }
 
     float time_step = 1.0f / 60.0f;
     cpSpaceStep(space, time_step);
 
-    cpVect pos = cpBodyGetPos(box_body1);
-    box_sprite1.setRotation(cpBodyGetAngle(box_body1));
-    box_sprite1.setPosition(sf::Vector2f(pos.x, pos.y));
+    // cpVect pos = cpBodyGetPos(box_body1);
+    // box_sprite1.setRotation(cpBodyGetAngle(box_body1));
+    // box_sprite1.setPosition(physics_to_graphics(pos));
 
-    pos = cpBodyGetPos(box_body2);
-    box_sprite2.setRotation(cpBodyGetAngle(box_body2));
-    box_sprite2.setPosition(sf::Vector2f(pos.x, pos.y));
+    // pos = cpBodyGetPos(box_body2);
+    // box_sprite2.setRotation(cpBodyGetAngle(box_body2));
+    // box_sprite2.setPosition(physics_to_graphics(pos));
 }
 
 void Level::move_camera(sf::RenderWindow& window) {
