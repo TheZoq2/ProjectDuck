@@ -2,8 +2,8 @@
 #include <SFML/System.hpp>
 #include <vectorutils.hpp>
 
-Duck::Duck(sf::Vector2<float> position, cpSpace* space)
-    : Entity(position, DUCK_MASS)
+Duck::Duck(sf::Vector2<float> position, cpSpace* space, std::string name)
+    : Entity(position, DUCK_MASS, name)
 {
     body_init(TILE_SIZE, TILE_SIZE, space);
     texture.loadFromFile("assets/duck.png");

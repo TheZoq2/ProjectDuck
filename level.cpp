@@ -9,6 +9,7 @@
 #include "entities/crate.hpp"
 #include "entities/lever.hpp"
 #include "entities/wall.hpp"
+#include "util.hpp"
 #include "vectorutils.hpp"
 #include "water_physics.hpp"
 
@@ -61,6 +62,8 @@ Level::Level(std::string filename)
     auto entity_layer = level_json_data["layers"][1];
     auto entity_layer_data = entity_layer["objects"];
 
+    std::string default_name = "a";
+    // load the entities in the list of entities
     for(auto entity : entity_layer_data)
     {
         int x = entity["x"];
@@ -72,24 +75,54 @@ Level::Level(std::string filename)
 
         sf::Vector2<float> pos(x, y);
 
+        std::string name;
+        if (entity.count("name") != 0) {
+            name = entity["name"];
+        } else {
+            name = default_name;
+            default_name += "a";
+        }
+
         if (type == "lever")
         {
-            new_entity = new Lever(pos);
+            new_entity = new Lever(pos, name);
         } else if (type == "crab") {
-            new_entity = new Crab(pos, space);
+            new_entity = new Crab(pos, name, space);
             this->crab = (Crab*)new_entity;
         } else if (type == "duck") {
-            new_entity = new Duck(pos, space);
+            new_entity = new Duck(pos, space, name);
             this->duck = (Duck*)new_entity;
         } else if (type == "crate") {
-            new_entity = new Crate(pos);
+            new_entity = new Crate(pos, name);
         } else if (type == "wall") {
-            new_entity = new Wall(pos, entity["height"], entity["width"]);
+            new_entity = new Wall(pos, entity["height"],
+                     entity["width"], name);
         }
 
         if (new_entity != nullptr)
         {
+            interaction_map[name] = std::vector<Entity*>();
             entities.push_back(new_entity);
+        }
+    }
+
+    // load them into the interaction map
+    for (auto entity : entity_layer_data) {
+        if (entity["properties"].count("links") != 0) {
+            vector<std::string> links = 
+                splitString(entity["properties"]["links"], ',');
+
+            // find the entity key
+            for (auto& pair : interaction_map) {
+                if (pair.first == entity["name"]) {
+                    for (std::string link_name : links) {
+                        Entity* link = find_entity(link_name);
+                        if (link != nullptr) {
+                            pair.second.push_back(link);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -115,6 +148,15 @@ Level::Level(std::string filename)
 
         this->audio_zones.push_back(result);
     }
+}
+
+Entity* Level::find_entity(std::string name) {
+    for (Entity* e : entities) {
+        if (e->get_name() == name) {
+            return e;
+        }
+    }
+    return nullptr;
 }
 
 Level::~Level() {
@@ -211,20 +253,20 @@ void Level::update() {
         if (entity->can_interact_with(
                     PlayerType::DUCK, duck->get_position())) {
             entity->interact();
-            if (interaction_map.count(entity) == 1) {
+            if (interaction_map.count(entity->get_name()) == 1) {
                 // call the interact function of all the 
                 // things this entity interacts with
-                for (Entity* e : interaction_map[entity]) {
+                for (Entity* e : interaction_map[entity->get_name()]) {
                     e->interact();
                 }
             }
         } else if (entity->can_interact_with(
                     PlayerType::CRAB, crab->get_position())) {
             entity->interact();
-            if (interaction_map.count(entity) == 1) {
+            if (interaction_map.count(entity->get_name()) == 1) {
                 // call the interact function of all the 
                 // things this entity interacts with
-                for (Entity* e : interaction_map[entity]) {
+                for (Entity* e : interaction_map[entity->get_name()]) {
                     e->interact();
                 }
             }
