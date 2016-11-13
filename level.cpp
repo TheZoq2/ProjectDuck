@@ -140,7 +140,7 @@ Level::Level(std::string filename)
             new_entity = new Crab(pos);
             this->crab = (Crab*)new_entity;
         } else if (type == "duck") {
-            new_entity = new Duck(pos);
+            new_entity = new Duck(pos, space);
             this->duck = (Duck*)new_entity;
         } else if (type == "crate") {
             new_entity = new Crate(pos);

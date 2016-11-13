@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "block.hpp"
+#include <chipmunk/chipmunk.h>
 
 enum PlayerType {DUCK, CRAB};
 
@@ -28,13 +29,17 @@ public:
         can_interact_with(PlayerType type, sf::Vector2<double> position);
 
     sf::Vector2<double> get_position() const;
-    void set_position(const sf::Vector2<double>& position);
+    virtual void set_position(const sf::Vector2<double>& position);
     int get_mass() const;
 
 protected:
 
     sf::Vector2<double> position;
     int mass;
+    
+    virtual void body_init(int width, int height, cpSpace* space);
+
+    cpBody* body;
 
 };
 
