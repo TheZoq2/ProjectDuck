@@ -52,6 +52,7 @@ Level::Level(std::string filename)
             sf::Sprite sprite;
             sprite.setTexture(tile_texture);
             sprite.setTextureRect(sf::IntRect((tile_index - 1) * TILE_SIZE, 0, TILE_SIZE, TILE_SIZE));
+            sprite.setOrigin(TILE_SIZE/2, TILE_SIZE/2);
             sf::Vector2f pos = sf::Vector2f(tile_x * TILE_SIZE, tile_y * TILE_SIZE);
             sprite.setPosition(pos);
 
@@ -123,7 +124,7 @@ Level::Level(std::string filename)
     // load them into the interaction map
     for (auto entity : entity_layer_data) {
         if (entity["properties"].count("links") != 0) {
-            vector<std::string> links = 
+            vector<std::string> links =
                 splitString(entity["properties"]["links"], ',');
 
             // find the entity key
@@ -212,22 +213,6 @@ void Level::draw(sf::RenderWindow& window)
     {
         entity->draw(window);
     }
-
-    sf::RectangleShape rectangle1(sf::Vector2f(200, 50));
-    sf::RectangleShape rectangle2(sf::Vector2f(40, 80));
-    rectangle1.setOrigin(100, 25);
-    rectangle2.setOrigin(20, 40);
-
-    cpVect pos = cpBodyGetPos(box_body1);
-    rectangle1.setRotation(cpBodyGetAngle(box_body1));
-    rectangle1.setPosition(physics_to_graphics(pos));
-
-    pos = cpBodyGetPos(box_body2);
-    rectangle2.setRotation(cpBodyGetAngle(box_body2));
-    rectangle2.setPosition(physics_to_graphics(pos));
-
-    window.draw(rectangle1);
-    window.draw(rectangle2);
 }
 
 void Level::init_physics() {
@@ -239,9 +224,6 @@ void Level::init_physics() {
 	cpSpaceSetCollisionSlop(space, 0.5f);
 
     init_water_physics(space, width * TILE_SIZE);
-
-    box_body1 = create_floating_box(200, 50, space);
-    box_body2 = create_floating_box(40, 80, space);
 }
 
 void Level::physics() {
@@ -254,7 +236,7 @@ void Level::move_camera(sf::RenderWindow& window) {
 
     sf::View camera_view(sf::FloatRect(0, 0, 800, 600));
     // we keep our view centered on the player //as 400 is the half of the scrensize
-    camera_view.setCenter(duck->get_position().x - camera_center,300);
+    camera_view.setCenter(duck->get_position().x - camera_center, 300);
 
     if ((duck->get_position().x - camera_center) > (window.getView().getCenter().x + 200)) {
         camera_view.setCenter(duck->get_position().x - camera_center - 200,300);
@@ -267,7 +249,7 @@ void Level::move_camera(sf::RenderWindow& window) {
     }
 
     camera_x = window.getView().getCenter().x;
-    
+
     if(camera_x < 400)
     {
         camera_x = 400;

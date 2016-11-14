@@ -51,3 +51,14 @@ std::vector<std::string> splitString(std::string original, char splitChar)
     result.push_back(buffer);
     return result;
 }
+
+sf::Sprite load_sprite(sf::Texture& texture, std::string filename)
+{
+    texture.loadFromFile(filename);
+    sf::Vector2u size = texture.getSize();
+    sf::Sprite sprite;
+    sprite.setTexture(texture);
+    sprite.setOrigin(size.x / 2, size.y / 2);
+
+    return sprite;
+}

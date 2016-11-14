@@ -1,16 +1,15 @@
 
 #include "lever.hpp"
 #include "vectorutils.hpp"
+#include "util.hpp"
 
 #include <iostream>
 
-Lever::Lever(sf::Vector2<float> position, std::string name) : 
+Lever::Lever(sf::Vector2<float> position, std::string name) :
     Entity(position, 0, name)
 {
-    main_texture.loadFromFile("assets/lever.png"); 
-    pulled_texture.loadFromFile("assets/lever_pulled.png");
-    main_sprite.setTexture(main_texture);
-    pulled_sprite.setTexture(pulled_texture);
+    main_sprite = load_sprite(main_texture, "assets/lever.png");
+    pulled_sprite = load_sprite(main_texture, "assets/lever_pulled.png");
     this->main_sprite.setPosition(sf::Vector2f(position.x, position.y));
     this->pulled_sprite.setPosition(sf::Vector2f(position.x, position.y));
     this->current_sprite = &main_sprite;
@@ -18,7 +17,7 @@ Lever::Lever(sf::Vector2<float> position, std::string name) :
 	state = OFF;
 }
 
-void Lever::draw(sf::RenderWindow& window) 
+void Lever::draw(sf::RenderWindow& window)
 {
     window.draw(*current_sprite);
 }

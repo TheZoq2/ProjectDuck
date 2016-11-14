@@ -1,13 +1,15 @@
 #include "wall.hpp"
 #include <iostream>
+#include "util.hpp"
 
 Wall::Wall(sf::Vector2<float> position, int height,
         int width, std::string name, cpSpace* space)
     : Entity(position, WALL_MASS, name) {
     texture.setRepeated(true);
-    texture.loadFromFile("assets/wall.png");
+    sprite = load_sprite(texture, "assets/wall.png");
     sprite.setTexture(texture);
     sprite.setPosition(position.x, position.y);
+    //sprite.setOrigin(width/2, height/2);
 
     this->body = cpBodyNew(mass, cpMomentForBox(mass, width, height));
     cpBodySetPos(body,
@@ -37,7 +39,7 @@ void Wall::interact() {
     cpVect pos = cpBodyGetPos(body);
     if (moved) {
         pos.y += TILE_SIZE * 3;
-        std::cout << "Moving " << name << "..." << std::endl;
+        //std::cout << "Moving " << name << "..." << std::endl;
     } else {
         pos.y -= TILE_SIZE * 3;
     }

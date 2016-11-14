@@ -1,18 +1,25 @@
 #include "duck.hpp"
 #include <SFML/System.hpp>
-#include <vectorutils.hpp>
+#include "vectorutils.hpp"
+#include "util.hpp"
+
+const int DUCK_SPRITE_WIDTH = 750;
+const int DUCK_SPRITE_HEIGHT = 748;
 
 Duck::Duck(sf::Vector2<float> position, cpSpace* space, std::string name)
     : Entity(position, DUCK_MASS, name)
 {
-    body_init(TILE_SIZE, TILE_SIZE, space);
-    textures[0].loadFromFile("assets/duck1.png");
-    textures[1].loadFromFile("assets/duck2.png");
-    textures[2].loadFromFile("assets/duck3.png");
+    std::string files[] = {
+        "assets/duck1.png",
+        "assets/duck2.png",
+        "assets/duck3.png"
+    };
     for (int i = 0; i < NUM_DUCK_SPRITES; ++i) {
-        sprites[i].setTexture(textures[i]);
+        sprites[i] = load_sprite(textures[i], files[i]);
         sprites[i].setScale(DUCK_CRAB_SCALE, DUCK_CRAB_SCALE);
     }
+    sf::Vector2u textureSize = textures[0].getSize();
+    body_init(textureSize.x * DUCK_CRAB_SCALE, textureSize.y * DUCK_CRAB_SCALE, space);
     current_sprite = 0;
     delay = 0;
 }
