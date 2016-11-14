@@ -15,6 +15,8 @@
 #include "water_physics.hpp"
 #include "entities/pressure_plate.hpp"
 
+#include "debug_draw.hpp"
+
 using namespace std;
 // For JSON parsing
 using namespace nlohmann;
@@ -215,6 +217,8 @@ void Level::draw(sf::RenderWindow& window)
     {
         entity->draw(window);
     }
+
+    draw_shapes(space, &window);
 }
 
 void Level::init_physics() {

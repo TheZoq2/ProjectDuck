@@ -33,7 +33,7 @@ void Duck::draw(sf::RenderWindow& window) {
         jump_cd--;
     }
 
-    std::cout << jump_cd << std::endl;
+    //std::cout << jump_cd << std::endl;
 
     cpVect pos = cpBodyGetPos(body);
     position = physics_to_graphics(pos);
