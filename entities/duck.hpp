@@ -19,10 +19,16 @@ public:
     virtual void set_position(const sf::Vector2<float>& position) override;
 
 private:
+    bool can_jump();
+
     sf::Sprite sprites[NUM_DUCK_SPRITES];
     sf::Texture textures[NUM_DUCK_SPRITES];
     int current_sprite;
     int delay;
+
+    cpSpace* space = nullptr;
+
+    int jump_cd = 0;
 };
 
 #endif

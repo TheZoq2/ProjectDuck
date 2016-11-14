@@ -33,6 +33,8 @@ class Lever: public Entity
         sf::Sprite* current_sprite;
 
         LeverState state;
+
+        int switch_cd = 0;
 };
 
 #endif

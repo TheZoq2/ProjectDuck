@@ -22,7 +22,9 @@ using namespace nlohmann;
 void add_tile_body(cpSpace* space, cpVect pos) {
     cpBody* body = cpSpaceGetStaticBody(space);
     cpBB bb = cpBBNew(pos.x, pos.y, pos.x + TILE_SIZE, pos.y + TILE_SIZE);
-    cpSpaceAddShape(space, cpBoxShapeNew2(body, bb));
+    cpShape* shape = cpBoxShapeNew2(body, bb);
+    cpShapeSetLayers(shape, 1);
+    cpSpaceAddShape(space, shape);
 }
 
 Level::Level(std::string filename)
