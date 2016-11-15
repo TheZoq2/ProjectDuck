@@ -23,7 +23,10 @@ using namespace nlohmann;
 
 void add_tile_body(cpSpace* space, cpVect pos) {
     cpBody* body = cpSpaceGetStaticBody(space);
-    cpBB bb = cpBBNew(pos.x, pos.y, pos.x + TILE_SIZE, pos.y + TILE_SIZE);
+    cpBB bb = cpBBNew(pos.x - TILE_SIZE/2,
+                      pos.y - TILE_SIZE/2,
+                      pos.x + TILE_SIZE/2,
+                      pos.y + TILE_SIZE/2);
     cpShape* shape = cpBoxShapeNew2(body, bb);
     cpShapeSetLayers(shape, 1);
     cpSpaceAddShape(space, shape);
