@@ -38,6 +38,7 @@ void Duck::draw(sf::RenderWindow& window) {
     cpVect pos = cpBodyGetPos(body);
     position = physics_to_graphics(pos);
     sprites[current_sprite].setPosition(position.x, position.y);
+    sprites[current_sprite].setRotation((-180 / 3.14) * cpBodyGetAngle(body));
     window.draw(sprites[current_sprite]);
     delay++;
     if (delay == DUCK_CRAB_DELAY) {
