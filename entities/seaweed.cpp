@@ -12,9 +12,11 @@ SeaWeed::SeaWeed(sf::Vector2f position, sf::Vector2f size, std::string name, cpS
     sprite.setPosition(position);
     
     this->body = cpBodyNewStatic();
-    cpBodySetPos(body, graphics_to_physics(sf::Vector2f(position.x + size.x / 2, position.y + size.y/ 2)));
-    cpShape* shape = cpSpaceAddShape(space,
-            cpBoxShapeNew(body, size.x, size.y));
+    cpBodySetPosition(body, graphics_to_physics(sf::Vector2f(position.x + size.x / 2, position.y + size.y/ 2)));
+    cpShape* shape = cpSpaceAddShape(
+        space,
+        cpBoxShapeNew(body, size.x, size.y, 0.1f)
+    );
 }
 
 void SeaWeed::draw(sf::RenderWindow& window) 

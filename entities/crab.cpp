@@ -21,7 +21,7 @@ Crab::Crab(sf::Vector2<float> position, std::string name, cpSpace* space)
 }
 
 void Crab::draw(sf::RenderWindow& window) {
-    cpVect pos = cpBodyGetPos(body);
+    cpVect pos = cpBodyGetPosition(body);
     position = physics_to_graphics(pos);
     sprites[current_sprite].setPosition(position.x, position.y);
     sprites[current_sprite].setRotation((-180 / 3.14) * cpBodyGetAngle(body));
@@ -47,12 +47,12 @@ void Crab::move() {
         velocity.x += DUCK_CRAB_SPEED;
     }
 
-	cpBodyApplyImpulse(body, cpvmult(velocity, DT), cpv(0, 0));
+    cpBodyApplyImpulseAtLocalPoint(body, cpvmult(velocity, DT), cpv(0, 0));
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        cpVect vel = cpBodyGetVel(body);
+        cpVect vel = cpBodyGetVelocity(body);
         vel.y = 400;
-        cpBodySetVel(body, vel);
+        cpBodySetVelocity(body, vel);
     }
 }
 

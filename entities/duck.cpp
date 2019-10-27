@@ -35,7 +35,7 @@ void Duck::draw(sf::RenderWindow& window) {
 
     //std::cout << jump_cd << std::endl;
 
-    cpVect pos = cpBodyGetPos(body);
+    cpVect pos = cpBodyGetPosition(body);
     position = physics_to_graphics(pos);
     sprites[current_sprite].setPosition(position.x, position.y);
     sprites[current_sprite].setRotation((-180 / 3.14) * cpBodyGetAngle(body));
@@ -69,9 +69,9 @@ void Duck::move() {
         }
     }
 
-	cpBodyApplyImpulse(body, cpvmult(impulse, DT), cpv(0, 0));
+    cpBodyApplyImpulseAtLocalPoint(body, cpvmult(impulse, DT), cpv(0, 0));
 
-    cpVect vel = cpBodyGetVel(body);
+    cpVect vel = cpBodyGetVelocity(body);
 
     if(vel.x > DUCK_CRAB_SPEED)
     {
@@ -84,20 +84,20 @@ void Duck::move() {
 
 
 
-    cpBodySetVel(body, vel);
+    cpBodySetVelocity(body, vel);
 }
 
 void Duck::set_position(const sf::Vector2<float>& position) {
     this->position = position;
-    cpBodySetPos(body, graphics_to_physics(sf::Vector2f(position.x, position.y)));
+    cpBodySetPosition(body, graphics_to_physics(sf::Vector2f(position.x, position.y)));
 }
 
 
 bool Duck::can_jump()
 {
-    cpVect point = cpBodyGetPos(body);
+    cpVect point = cpBodyGetPosition(body);
     point.y -= 20;
-    cpShape* shape = cpSpaceNearestPointQueryNearest(space, point, 1, CP_ALL_LAYERS, CP_NO_GROUP, nullptr);
+    cpShape* shape = cpSpacePointQueryNearest(space, point, 1, CP_SHAPE_FILTER_ALL, nullptr);
 
     return shape != nullptr;
 }

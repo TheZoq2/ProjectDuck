@@ -33,9 +33,11 @@ int Entity::get_mass() const {
 void Entity::body_init(int width, int height, cpSpace* space) {
     this->body = cpSpaceAddBody(space,
             cpBodyNew(mass, cpMomentForBox(mass, width, height)));
-    cpBodySetPos(body, graphics_to_physics(sf::Vector2f(position.x, position.y)));
-    cpShape* shape = cpSpaceAddShape(space,
-            cpBoxShapeNew(body, width, height));
+    cpBodySetPosition(body, graphics_to_physics(sf::Vector2f(position.x, position.y)));
+    cpShape* shape = cpSpaceAddShape(
+        space,
+        cpBoxShapeNew(body, width, height, 0.1f)
+    );
 }
 
 std::string Entity::get_name() const {

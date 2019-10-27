@@ -15,7 +15,7 @@
 #include "water_physics.hpp"
 #include "entities/pressure_plate.hpp"
 
-#include "debug_draw.hpp"
+//#include "debug_draw.hpp"
 
 using namespace std;
 // For JSON parsing
@@ -27,8 +27,8 @@ void add_tile_body(cpSpace* space, cpVect pos) {
                       pos.y - TILE_SIZE/2,
                       pos.x + TILE_SIZE/2,
                       pos.y + TILE_SIZE/2);
-    cpShape* shape = cpBoxShapeNew2(body, bb);
-    cpShapeSetLayers(shape, 1);
+    cpShape* shape = cpBoxShapeNew2(body, bb, 0.1f);
+    //cpShapeSetLayers(shape, 1);
     cpSpaceAddShape(space, shape);
 }
 
@@ -221,7 +221,7 @@ void Level::draw(sf::RenderWindow& window)
         entity->draw(window);
     }
 
-    draw_shapes(space, &window);
+    //draw_shapes(space, &window);
 }
 
 void Level::init_physics() {

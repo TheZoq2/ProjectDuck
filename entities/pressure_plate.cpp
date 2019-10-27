@@ -1,6 +1,6 @@
 #include "pressure_plate.hpp"
 
-bool handle_pressure(cpArbiter* arb, cpSpace* space, void* ptr) {
+cpBool handle_pressure(cpArbiter* arb, cpSpace* space, void* ptr) {
     PressurePlate* plate = (PressurePlate*)ptr;
     CP_ARBITER_GET_SHAPES(arb, plate_shape, obj_shape);
     cpBody* obj_body = cpShapeGetBody(obj_shape);
@@ -8,7 +8,7 @@ bool handle_pressure(cpArbiter* arb, cpSpace* space, void* ptr) {
 
     plate->has_enough_weight = mass >= MASS_THREASHOLD;
     
-    return true;
+    return cpTrue;
 }
 
 PressurePlate::PressurePlate(sf::Vector2<float> position, 
@@ -18,13 +18,16 @@ PressurePlate::PressurePlate(sf::Vector2<float> position,
     cpBB bb = cpBBNew(v.x, v.y, v.x + PLATE_WIDTH, v.y + PLATE_HEIGHT);
     body = cpSpaceGetStaticBody(space);
 
-    cpShape* shape = cpSpaceAddShape(space,
-            cpBoxShapeNew2(body, bb));
+    cpShape* shape = cpSpaceAddShape(
+        space,
+        cpBoxShapeNew2(body, bb, 0.1f)
+    );
     cpShapeSetSensor(shape, true);
     cpShapeSetCollisionType(shape, 2);
 
-    cpSpaceAddCollisionHandler(space, 2, 0, NULL, 
-            (cpCollisionPreSolveFunc)handle_pressure, NULL, nullptr, this);
+    cpCollisionHandler* collision_handler = cpSpaceAddCollisionHandler(space, 2, 0);
+    collision_handler->preSolveFunc = (cpCollisionPreSolveFunc)handle_pressure;
+    collision_handler->userData = this;
 
     main_texture.loadFromFile("assets/pressure_plate.png");
     pushed_texture.loadFromFile("assets/pressure_plate_pressed.png");
